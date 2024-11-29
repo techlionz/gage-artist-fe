@@ -1,0 +1,11 @@
+<div class="form-group row">
+    <label *ngIf="label.length > 0" class="col-sm-12" for="idField"><i *ngIf="icon" class="{{ icon }}"></i> 
+        {{label}}</label>
+    <div class="col-sm-12 ">
+        <select *ngIf="reading != true"  [(ngModel)]="value" placeholder="Select Player" (change)="onChangeSelect($event)" class="form-control" [formControl]="form" >
+            <option value=""></option>
+            <option *ngFor="let item of valueList;" [value]="item.id" ngClass ="{{item.id}}"  >{{item.name}}</option>
+        </select>
+        <span *ngIf="reading == true">{{value}}</span>
+    </div>
+</div>

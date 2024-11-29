@@ -1,0 +1,7 @@
+<div class="form-group row mt-3" >
+    <label class="col-sm-12" for="idField">{{label}}</label>
+    <div class="col-sm-12">
+        <input *ngIf="reading != true" type="checkbox" placeholder="{{placeholder}}" value="{{value}}" [formControl]="form" >
+        <span *ngIf="reading == true">{{value}}</span>
+    </div>
+</div>

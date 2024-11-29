@@ -1,0 +1,39 @@
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
+import { BaseModule } from './base/base.module';
+import { RequestModule } from './request/request.module';
+import { HeaderComponent } from './components/header/header.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FragmentsModule } from './fragments/fragments.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    NavbarComponent,
+    DashboardComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    AuthModule,
+    BaseModule,
+    FragmentsModule,
+    RequestModule
+  ],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

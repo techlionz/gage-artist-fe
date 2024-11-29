@@ -1,0 +1,214 @@
+<page-title title="Requests" subtitle="Requests list"></page-title>
+
+<!-- Main content -->
+<section class="content">
+	<div class="container-fluid">
+
+
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+
+					<!-- /.card-header -->
+					<div class="card-body row">
+
+						<div class="col-3 float-start  mb-3">
+							<search-box (search)="onSearch($event)"></search-box>
+						</div>
+
+						<table class="table table-striped" >
+							<thead class="table-light">
+								<tr>
+									<th>
+										<sortable (toggle)="onSort($event)" caption="Request Photo" name="Request"></sortable>
+									</th>
+<th></th>
+                  <th>
+                    <sortable (toggle)="onSort($event)" caption="Avatars" name="Avatars">
+                    </sortable>
+                  </th>
+
+                  <th>
+                    <sortable (toggle)="onSort($event)" caption="Req.Info" name="ReqInfo">
+                    </sortable>
+                  </th>
+									<th class="w-10">
+										{{ "Actions" }}
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let one of records;">
+									<td>
+										<span>
+											{{ one.request_nickname }}
+											<br/>
+											{{ one.email }}
+										</span>
+									</td>
+									<td>
+										<span>
+											{{ one.balance }}
+										</span>
+									</td>
+									<td>
+										<span>
+											{{ one.reg_date | date: 'dd/MM/yyyy' }}
+										</span>
+									</td>
+									<td>
+										<span>
+											{{ one.last_login  | date: 'dd/MM/yyyy hh:mm a' }}
+										</span>
+									</td>
+									<td>
+										<span>
+											{{ ((one.total_won - one.total_bet) -  one.total_rake) | number:'1.0-1' }}
+										</span>
+									</td>
+									<td>
+										<span>
+											{{ one.commission }}
+										</span>
+									</td>
+									<td>
+										<span>
+											<a (click)="onSendChips(one.request_id)" title="Send Chips"><i class="fa fa-arrow-up"></i></a>
+										</span>
+									</td>
+
+
+								</tr>
+
+                <tr *ngIf="!records || records.length < 1">
+                  <td style="width: 160px; background: #EEE; margin-right: 10px; margin-right: 10px">
+                    <div class="position-relative">
+                      <small>User Photo</small>
+                      <img style="width: 128px; height: 128px; " src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
+
+                    </div>
+                    <div>
+                      <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
+                    </div>
+
+                  </td>
+                  <td>&nbsp;</td>
+                  <td  style="width: 160px; background: #EEE; float: left;">
+                    <div class="position-relative float-left">
+                      <small>Main Avatar</small>
+                      <img style="width: 128px; height: 128px; padding: 2px;" src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
+                    </div>
+                    <div>
+                      <a target="_blank" href="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D">
+                      <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
+                      </a>
+                    </div>
+                  </td>
+                  <td  style="width: 160px; background: #EEE; float: left;">
+                    <div class="position-relative float-left">
+                      <small>Lobby Avatar</small>
+                      <img style="width: 128px; height: 128px; padding: 2px;" src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
+                    </div>
+                    <div>
+                      <a target="_blank" href="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D">
+                        <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
+                      </a>
+                    </div>
+                  </td>
+                  <td  style="width: 160px; background: #EEE; float: left;">
+                    <small>Detail Avatar</small>
+                    <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
+
+                      <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                    </div>
+                    <div>
+                        <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
+                      </div>
+                  </td>
+          <td>
+
+            <div>Player: <b> Gamer 1</b></div>
+            <div>Req. Date: <b>01-01-2024 6:30pm</b></div>
+          </td>
+                  <td>
+                    <input type="button" value="Save" >
+                  </td>
+                </tr>
+
+
+                <tr *ngIf="!records || records.length < 1">
+                  <td style="width: 160px; background: #EEE; margin-right: 10px; margin-right: 10px">
+                    <div class="position-relative">
+                      <small>User Photo</small>
+                      <img style="width: 128px; height: 128px; " src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
+
+                    </div>
+                    <div>
+                      <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
+                    </div>
+
+                  </td>
+                  <td>&nbsp;</td>
+                  <td  style="width: 160px; background: #EEE; float: left;">
+                    <div class="position-relative float-left">
+                      <small>Main Avatar</small>
+                      <img style="width: 128px; height: 128px; padding: 2px;" src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
+                    </div>
+                    <div>
+                      <a target="_blank" href="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D">
+                        <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
+                      </a>
+                    </div>
+                  </td>
+                  <td  style="width: 160px; background: #EEE; float: left;">
+                    <small>Detail Avatar</small>
+                    <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
+
+                      <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                    </div>
+                    <div>
+                      <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
+                    </div>
+                  </td>
+                  <td  style="width: 160px; background: #EEE; float: left;">
+                    <small>Detail Avatar</small>
+                    <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
+
+                      <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                    </div>
+                    <div>
+                      <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
+                    </div>
+                  </td>
+                  <td>
+
+                    <div>Player: <b> Gamer 1</b></div>
+                    <div>Req. Date: <b>01-01-2024 6:30pm</b></div>
+                  </td>
+                  <td>
+                    <input type="button" value="Save" >
+                  </td>
+                </tr>
+							</tbody>
+						</table>
+
+						<mat-paginator (page)="handlePageEvent($event)" [length]="pageOptions.pageEvents.length"
+							[pageSize]="pageOptions.pageEvents.pageSize" [pageSizeOptions]="pageOptions.sizeOptions"
+							aria-label="Select page">
+						</mat-paginator>
+
+
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.container-fluid -->
+</section>
+<!-- /.content -->

@@ -1,0 +1,8 @@
+<div class="form-group row mt-3" >
+    <label class="col-sm-12" for="idField"><i *ngIf="icon" class="{{ icon }}"></i> 
+        {{label}}</label>
+    <div class="col-sm-12">
+        <textarea *ngIf="reading != true" class="form-control" placeholder="{{placeholder}}" [formControl]="form">{{value}}</textarea>
+        <span *ngIf="reading == true">{{value}}</span>
+    </div>
+</div>

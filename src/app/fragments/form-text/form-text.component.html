@@ -1,0 +1,10 @@
+<div class="form-group row" >
+    
+    <label class="col-sm-12" for="idField">
+        <i *ngIf="icon" class=" {{ icon }}"></i> 
+        {{label}}</label>
+    <div class="col-sm-12">
+        <input *ngIf="reading != true" class="form-control" type="text" placeholder="{{placeholder}}" value="{{value}}" [formControl]="form" >
+        <span *ngIf="reading == true">{{value}}</span>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+
+<aside class="left-sidebar" data-sidebarbg="skin6">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar" data-sidebarbg="skin6">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+        <li class="sidebar-item {{activeDashboard}}" (click)="onSelectMenu($event, 'dashboard')">
+          <a class="sidebar-link sidebar-link" href="#/dashboard"
+             aria-expanded="false"><i class="fa fa-home"></i><span
+            class="hide-menu">Dashboard</span></a>
+        </li>
+        <li class="list-divider"></li>
+        <li class="nav-small-cap">
+          <span class="hide-menu">Pages</span>
+        </li>
+        <li class="sidebar-item {{activeRequests}}"  (click)="onSelectMenu($event, 'requests')">
+          <a class="sidebar-link" href="#/requests"aria-expanded="false"><i class="fa fa-users"></i><span
+            class="hide-menu">Requests</span></a>
+        </li>
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>

@@ -1,0 +1,22 @@
+<div class="box-card box-card-green" style="border-left-color: {{color}}">
+    
+    <div *ngIf="fontIcon" class="box-bg-icon">
+      <i class="{{fontIcon}}"></i>
+    </div>
+    <div *ngIf="0" class="box-bg-url">
+      <img src="{{urlIcon}}" />
+    </div>
+
+    <div class="box-content">
+      <div class="row">
+        <div class="col-12">
+          <h2>{{title}}</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 card-label"[innerHTML]="message" ></div>
+      </div>
+    </div>
+
+  </div>

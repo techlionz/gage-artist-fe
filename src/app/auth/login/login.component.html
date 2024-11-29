@@ -1,0 +1,85 @@
+<div class="main-wrapper">
+	<!-- ============================================================== -->
+	<!-- Preloader - style you can find in spinners.css -->
+	<!-- ============================================================== -->
+	<div class="preloader">
+		<div class="lds-ripple">
+			<div class="lds-pos"></div>
+			<div class="lds-pos"></div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- Preloader - style you can find in spinners.css -->
+	<!-- ============================================================== -->
+	<!-- ============================================================== -->
+	<!-- Login box.scss -->
+	<!-- ============================================================== -->
+	<div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative"
+		style="background:#000 url(http://162.241.127.138/goldenage/public/assets/images/big/auth-bg.jpg) no-repeat center center;">
+		<div class="auth-box row">
+			<div class="col-lg-5 col-md-5 modal-bg-img"
+				style="background-image: url(http://162.241.127.138/goldenage/public/assets/images/big/3.jpg);">
+			</div>
+			<div class="col-lg-7 col-md-7 bg-white">
+				<div class="p-3">
+					<div class="text-center">
+						<img src="http://162.241.127.138/goldenage/public/assets/images/big/icon.png" alt="wrapkit">
+					</div>
+					<h2 class="mt-3 text-center">Sign In</h2>
+					<p class="text-center">Enter your email address and password to access control panel.</p>
+
+					<!-- Session Status -->
+
+					<!-- Validation Errors -->
+
+					<form method="POST" (ngSubmit)="onSubmit()">
+						<input type="hidden" name="_token" value="HGS2DbZF01n1QgQthcOK3U46QhUKP5LWPNfEGmoi">
+						<!-- Email Address -->
+						<span class="text-danger text-normal mb-2" >{{errorMessage}}</span>
+						<div>
+							<label class="block font-medium text-sm text-gray-700" for="email">
+								Email
+							</label>
+
+							<input [(ngModel)]="email"
+								class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 form-control block mt-1 w-full"
+								id="email" type="email" name="email" required="required" autofocus="autofocus">
+						</div>
+
+						<!-- Password -->
+						<div class="mt-4">
+							<label class="block font-medium text-sm text-gray-700" for="password">
+								Password
+							</label>
+
+							<input [(ngModel)]="password"
+								class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 form-control block mt-1 w-full"
+								id="password" type="password" name="password" required="required"
+								autocomplete="current-password">
+						</div>
+
+
+						<div class="flex items-center justify-end mt-4">
+
+							<button type="submit"
+								class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn btn-block btn-dark">
+								Log in
+							</button>
+						</div>
+					</form>
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- Login box.scss -->
+	<!-- ============================================================== -->
+</div>

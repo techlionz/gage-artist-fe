@@ -1,0 +1,73 @@
+<page-title title="{{view.title}}" subtitle="{{view.subtitle}}"></page-title>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        
+
+        
+
+        <form (ngSubmit)="onSubmitEdit()" [formGroup]="formGroup" >
+            <div class="row pl-2">
+                <div class="col-md-4">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
+
+                            <div class="card-tools">
+                                <mode-toggle class="p-2" #modeButton (toggle)="onModeToggle($event)" id="a"></mode-toggle>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form-text [reading]="ifMode('a',0)" label="Name" placeholder="Enter Name"
+                                [formControl]="formGroup.controls['name']" value="{{ detail.name }}"></form-text>
+                            <form-text [reading]="ifMode('a',0)" label="Address 1" placeholder="Enter Address Line 1"
+                                [formControl]="formGroup.controls['address1']" value="{{ detail.address1 }}"></form-text>
+                            <form-text [reading]="ifMode('a',0)" label="Address 2" placeholder="Enter Address Line 2"
+                                [formControl]="formGroup.controls['address2']" value="{{ detail.address2 }}"></form-text>
+                            <form-select [reading]="ifMode('a',0)" label="City" placeholder="Enter City"
+                                [formControl]="formGroup.controls['city_id']" value="{{ detail.city_name }}"
+                                [valueList]="cityList"></form-select>
+                            <form-select [reading]="ifMode('a',0)" label="State" placeholder="Enter State"
+                                [formControl]="formGroup.controls['state_id']" value="{{ detail.state_name }}"
+                                [valueList]="stateList"></form-select>
+                            <form-select [reading]="ifMode('a',0)" label="Country" placeholder="Enter Country"
+                                [formControl]="formGroup.controls['country_id']" value="{{ detail.country_name }}"
+                                [valueList]="countryList"></form-select>
+                            <form-text [reading]="ifMode('a',0)" label="Zip" placeholder="Enter Zip" 
+                                [formControl]="formGroup.controls['zip']" value="{{ detail.zip }}"></form-text>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-4">
+                    <div class="card card-secondary card-outline">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
+
+                        </div>
+                        <div class="card-body">
+                            <form-text [reading]="ifMode('a',0)" label="Web" placeholder="Enter Web URL" value="{{detail.web}}"
+                                [formControl]="formGroup.controls['web']"></form-text>
+                            <form-text [reading]="ifMode('a',0)" label="Email" placeholder="Enter Email" value="{{detail.email}}"
+                                [formControl]="formGroup.controls['email']"></form-text>
+                            <form-text [reading]="ifMode('a',0)" label="Fax" placeholder="Enter Fax" value="{{detail.fax}}"
+                                [formControl]="formGroup.controls['fax']"></form-text>
+                            <form-text [reading]="ifMode('a',0)" label="Phone" placeholder="Enter Phone"value="{{detail.phone}}"
+                                [formControl]="formGroup.controls['phone']"></form-text>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <div class="row pl-2 text-end" *ngIf="ifMode('a',1)">
+                <div class="col-8">
+                    <cancel-button class="me-2" (click)="onSubmitCancel()"></cancel-button>
+                    <submit-button></submit-button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

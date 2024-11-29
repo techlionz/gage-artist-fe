@@ -1,0 +1,20 @@
+ .pr-10 {
+ 	padding-left: 15px;
+ 	margin-top: -5px;
+ }
+
+ .page-breadcrumb {
+ 	display: none;
+ 	/*Temporarily hide it.*/
+ }
+
+ .page-wrapper>.container-fluid {
+ 	padding: 20px;
+ }
+
+
+ @media (min-width: 768px) and (max-width:1170px) { 
+ 	.left-sidebar {
+		 margin-left: -65px !important;
+	 }
+ }

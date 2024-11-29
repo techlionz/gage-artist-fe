@@ -1,0 +1,9 @@
+services:
+  artist-fe:
+    image: nginx:alpine
+    container_name: artist-fe
+    ports:
+      - "80:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+    restart: unless-stopped

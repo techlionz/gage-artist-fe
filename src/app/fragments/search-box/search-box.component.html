@@ -1,0 +1,8 @@
+<div class="search-area">
+    <div class="input-group" style="position: relative;">
+        <input (keyup.enter)="onSearch($event)" (change)="onChange($event)" [placeholder]="placeholder" class="form-control pl-4" type="text" [(ngModel)]="value" style="z-index: 1;">
+        <span class="input-group-append">
+            <i class="fa fa-search" style="z-index: 2; position: absolute; left: 5px; top: 11px; opacity: 0.5;"></i>
+        </span>
+    </div>
+</div>
