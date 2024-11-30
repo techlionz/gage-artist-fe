@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Buffer } from "Buffer";
 
 @Injectable({
 	providedIn: 'root'
