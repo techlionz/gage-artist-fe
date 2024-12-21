@@ -46,7 +46,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
 	refreshList(event: PageEvent) {
 		let params = '&pageIndex=' + event.pageIndex + '&pageSize=' + event.pageSize + '&sort=' + this.sort.name + '&order=' + this.sort.order;
 
-		this.httpx.get(Global.api('affiliate-requests/' + this.affiliateId + '?search=' + this.search + params)).subscribe((data: any) => {
+		this.httpx.get(Global.api('artist/requests' + '?search=' + this.search + params)).subscribe((data: any) => {
 			this.records = data.data;
 			this.pageOptions.pageEvents.length = data.recordsFiltered;
 		})
@@ -59,40 +59,5 @@ export class ListComponent extends ListControllerComponent implements OnInit {
 	onSort(a: any) {
 		this.sort = a;
 		this.refreshList(this.pageOptions.pageEvents);
-	}
-	onSendChips(requestId: number) {
-
-		let that = this;
-		let send = this.dialog.open(SendComponent, {
-
-			data: {}
-
-		});
-		send.afterClosed().subscribe(result => {
-			if (result.action == "1") {
-				let data = {
-					'affiliate_id': this.affiliateId,
-					'request_id': requestId,
-					'chips': result.chips,
-				};
-				this.httpx.post(Global.api('affiliate-transaction-send/' + that.affiliateId), data).subscribe((resultRet: any) => {
-					if (resultRet.status == 'OK') {
-						let msg = "Your account credited with " + result.chips + " chip(s)";
-						this.msgModal = msg;
-						this.refreshList(this.pageOptions.pageEvents);
-
-					}
-					else {
-						this.commonError = resultRet.error.messages;
-					}
-
-				},
-					(error: any) => {
-						this.commonError = error.error.messages;
-
-					}
-				);
-			}
-		});
 	}
 }

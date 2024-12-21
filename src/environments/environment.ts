@@ -7,7 +7,7 @@ export const environment = {
 	APP_WELCOME: 'http://localhost:4200/affiliateapp/login.html',
 	APP_DASHBOARD: 'http://localhost:4200/affiliateapp/dashboard',
 	AUTH_BEGIN: 'http://localhost/gage-be/public/auth/begin',
-	API_ENDPOINT: 'http://localhost/gage-be/public/api/v1/',
+	API_ENDPOINT: 'http://localhost:1080/server.php/api/v1/',
 	CHAT_API_ENDPOINT: 'http://localhost:8102/',
 	LOBBY_WEB_URL: 'http://localhost:48001/web',
 	CHAT_SOCKET_URL: 'ws://127.0.0.1:8102/websocket',

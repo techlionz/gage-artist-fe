@@ -23,7 +23,7 @@
 									<th>
 										<sortable (toggle)="onSort($event)" caption="Request Photo" name="Request"></sortable>
 									</th>
-<th></th>
+                  <th></th>
                   <th>
                     <sortable (toggle)="onSort($event)" caption="Avatars" name="Avatars">
                     </sortable>
@@ -39,98 +39,89 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let one of records;">
-									<td>
-										<span>
-											{{ one.request_nickname }}
-											<br/>
-											{{ one.email }}
-										</span>
-									</td>
-									<td>
-										<span>
-											{{ one.balance }}
-										</span>
-									</td>
-									<td>
-										<span>
-											{{ one.reg_date | date: 'dd/MM/yyyy' }}
-										</span>
-									</td>
-									<td>
-										<span>
-											{{ one.last_login  | date: 'dd/MM/yyyy hh:mm a' }}
-										</span>
-									</td>
-									<td>
-										<span>
-											{{ ((one.total_won - one.total_bet) -  one.total_rake) | number:'1.0-1' }}
-										</span>
-									</td>
-									<td>
-										<span>
-											{{ one.commission }}
-										</span>
-									</td>
-									<td>
-										<span>
-											<a (click)="onSendChips(one.request_id)" title="Send Chips"><i class="fa fa-arrow-up"></i></a>
-										</span>
-									</td>
+                <tr *ngFor="let one of records;" >
 
-
-								</tr>
-
-                <tr *ngIf="!records || records.length < 1">
-                  <td style="width: 160px; background: #EEE; margin-right: 10px; margin-right: 10px">
+                  <td style="width: 160px;  margin-right: 10px; margin-right: 10px">
                     <div class="position-relative">
                       <small>User Photo</small>
-                      <img style="width: 128px; height: 128px; " src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
-
+                      <img style="width: 128px; height: 128px; " src="{{ one.photo }}" />
                     </div>
-                    <div>
-                      <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
+                    <div *ngIf="one.photo" >
+                      <a target="_blank" href="{{ one.photo }}">
+                      <span><i class="fa fa-download " style="padding-right: 10px" ></i> </span>
+                      </a>
                     </div>
-
                   </td>
+
                   <td>&nbsp;</td>
-                  <td  style="width: 160px; background: #EEE; float: left;">
-                    <div class="position-relative float-left">
-                      <small>Main Avatar</small>
-                      <img style="width: 128px; height: 128px; padding: 2px;" src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
-                    </div>
-                    <div>
-                      <a target="_blank" href="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D">
-                      <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
-                      </a>
-                    </div>
-                  </td>
-                  <td  style="width: 160px; background: #EEE; float: left;">
-                    <div class="position-relative float-left">
-                      <small>Lobby Avatar</small>
-                      <img style="width: 128px; height: 128px; padding: 2px;" src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
-                    </div>
-                    <div>
-                      <a target="_blank" href="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D">
-                        <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
-                      </a>
-                    </div>
-                  </td>
-                  <td  style="width: 160px; background: #EEE; float: left;">
-                    <small>Detail Avatar</small>
-                    <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
 
-                      <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
-                    </div>
-                    <div>
+                  <td  style="width: 160px;  float: left;">
+                    <div class="position-relative float-left">
+                      <small>Avatar 1</small>
+                      <div *ngIf="one.avatar1" >
+                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar1 }}" />
+                        <a target="_blank" href="{{ one.avatar1 }}">
+                          <span><i class="fa fa-download " style=" padding-right: 10px" ></i> </span>
+                        </a>
+                      </div>
+
+                      <div *ngIf="! one.avatar1" >
+                        <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
+                          <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                        </div>
                         <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
                       </div>
-                  </td>
-          <td>
+                    </div>
 
-            <div>Player: <b> Gamer 1</b></div>
-            <div>Req. Date: <b>01-01-2024 6:30pm</b></div>
-          </td>
+                  </td>
+
+
+                  <td  style="width: 160px;  float: left;">
+                    <div class="position-relative float-left">
+                      <small>Avatar 2</small>
+                      <div *ngIf="one.avatar2" >
+                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar2 }}" />
+                        <a target="_blank" href="{{ one.avatar2 }}">
+                        <span><i class="fa fa-download " style=" padding-right: 10px" ></i> </span>
+                        </a>
+                      </div>
+
+                      <div *ngIf="! one.avatar2" >
+                        <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
+                          <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                        </div>
+                        <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
+                      </div>
+                    </div>
+
+                  </td>
+
+
+                  <td  style="width: 160px;  float: left;">
+                    <div class="position-relative float-left">
+                      <small>Avatar 3</small>
+                      <div *ngIf="one.avatar3" >
+                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar3 }}" />
+                        <a target="_blank" href="{{ one.avatar3 }}">
+                        <span><i class="fa fa-download " style=" padding-right: 10px" ></i> </span>
+                        </a>
+                      </div>
+
+                      <div *ngIf="! one.avatar3" >
+                        <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
+                          <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                        </div>
+                        <span><i class="fa fa-download " style=" color: transparent;padding-right: 10px" ></i> </span>
+                      </div>
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <div>Player: <b> {{ one.nickname }}</b></div>
+                    <div>Req. Date: <b> {{ one.requested_at }} </b></div>
+                  </td>
+
                   <td>
                     <input type="button" value="Save" >
                   </td>
@@ -138,57 +129,7 @@
 
 
                 <tr *ngIf="!records || records.length < 1">
-                  <td style="width: 160px; background: #EEE; margin-right: 10px; margin-right: 10px">
-                    <div class="position-relative">
-                      <small>User Photo</small>
-                      <img style="width: 128px; height: 128px; " src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
-
-                    </div>
-                    <div>
-                      <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
-                    </div>
-
-                  </td>
-                  <td>&nbsp;</td>
-                  <td  style="width: 160px; background: #EEE; float: left;">
-                    <div class="position-relative float-left">
-                      <small>Main Avatar</small>
-                      <img style="width: 128px; height: 128px; padding: 2px;" src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D" />
-                    </div>
-                    <div>
-                      <a target="_blank" href="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?fm=jpg&q=60&w=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D">
-                        <span><i class="fa fa-download " style=" color: black; padding-right: 10px" ></i> </span>
-                      </a>
-                    </div>
-                  </td>
-                  <td  style="width: 160px; background: #EEE; float: left;">
-                    <small>Detail Avatar</small>
-                    <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
-
-                      <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
-                    </div>
-                    <div>
-                      <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
-                    </div>
-                  </td>
-                  <td  style="width: 160px; background: #EEE; float: left;">
-                    <small>Detail Avatar</small>
-                    <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
-
-                      <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
-                    </div>
-                    <div>
-                      <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
-                    </div>
-                  </td>
-                  <td>
-
-                    <div>Player: <b> Gamer 1</b></div>
-                    <div>Req. Date: <b>01-01-2024 6:30pm</b></div>
-                  </td>
-                  <td>
-                    <input type="button" value="Save" >
-                  </td>
+                  <td colspan="6" >No record found</td>
                 </tr>
 							</tbody>
 						</table>
