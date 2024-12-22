@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListComponent } from './list/list.component';
-import { SendComponent } from './send/send.component';
 import { DetailComponent } from './detail/detail.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AddComponent } from './add/add.component';
@@ -11,13 +10,15 @@ import { FragmentsModule } from '../fragments/fragments.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 
+import { ImageUploadComponent } from '../base/components/image-upload';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
     ListComponent,
     DetailComponent,
     AddComponent,
-    SendComponent
+    ImageUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +29,7 @@ import {MatButtonModule} from '@angular/material/button';
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
+    NgxFileDropModule
   ]
 })
 export class RequestModule { }

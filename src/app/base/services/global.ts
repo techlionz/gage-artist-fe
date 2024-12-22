@@ -64,6 +64,8 @@ export class Global {
   public static API_USER  = 'user';
   public static API_LOGOUT  = 'auth/logout';
 
+  public static API_ARTIST_REQUEST = "artist/upload"
+
   /**
    * Make api url
    */
@@ -85,7 +87,7 @@ export class Global {
   public static chatSocket() {
 	  return environment.CHAT_SOCKET_URL ;
   }
-  
+
 
   public static sizeOptions = [10, 25, 100] ;
   /**

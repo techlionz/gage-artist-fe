@@ -41,6 +41,7 @@
 							<tbody>
                 <tr *ngFor="let one of records;" >
 
+
                   <td style="width: 160px;  margin-right: 10px; margin-right: 10px">
                     <div class="position-relative">
                       <small>User Photo</small>
@@ -59,15 +60,16 @@
                     <div class="position-relative float-left">
                       <small>Avatar 1</small>
                       <div *ngIf="one.avatar1" >
-                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar1 }}" />
                         <a target="_blank" href="{{ one.avatar1 }}">
-                          <span><i class="fa fa-download " style=" padding-right: 10px" ></i> </span>
+                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar1 }}" />
                         </a>
+                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '0', $event)"></app-image-upload>
+
                       </div>
 
                       <div *ngIf="! one.avatar1" >
-                        <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
-                          <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                        <div class="position-relative float-left " style=" height: 128px; width: 128px">
+                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '0', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
                       </div>
@@ -80,15 +82,16 @@
                     <div class="position-relative float-left">
                       <small>Avatar 2</small>
                       <div *ngIf="one.avatar2" >
-                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar2 }}" />
                         <a target="_blank" href="{{ one.avatar2 }}">
-                        <span><i class="fa fa-download " style=" padding-right: 10px" ></i> </span>
+                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar2 }}" />
                         </a>
+                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '1', $event)"></app-image-upload>
+
                       </div>
 
                       <div *ngIf="! one.avatar2" >
-                        <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
-                          <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                        <div class="position-relative float-left " style="height: 128px; width: 128px">
+                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '1', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
                       </div>
@@ -101,15 +104,18 @@
                     <div class="position-relative float-left">
                       <small>Avatar 3</small>
                       <div *ngIf="one.avatar3" >
-                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar3 }}" />
                         <a target="_blank" href="{{ one.avatar3 }}">
-                        <span><i class="fa fa-download " style=" padding-right: 10px" ></i> </span>
+                        <img style="width: 128px; height: 128px; padding: 2px;" src="{{ one.avatar3 }}" />
                         </a>
+
+                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '2', $event)"></app-image-upload>
+
+
                       </div>
 
                       <div *ngIf="! one.avatar3" >
-                        <div class="position-relative float-left " style="border: 3px solid silver; height: 128px; width: 128px">
-                          <p style=" text-align: center; line-height: 128px;">Drag & Drop</p>
+                        <div class="position-relative float-left " style=" height: 128px; width: 128px">
+                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '2', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent;padding-right: 10px" ></i> </span>
                       </div>
@@ -123,7 +129,13 @@
                   </td>
 
                   <td>
-                    <input type="button" value="Save" >
+                    <button
+                      *ngIf="imageStatus[one.player_id]"
+                      (click)="saveImages(one.player_id)"
+                      class="save-btn btn-round">
+                      Save Image
+                    </button>
+
                   </td>
                 </tr>
 
