@@ -18,8 +18,8 @@ const routes: Routes = [
 	{ path: 'dashboard', component: DashboardComponent },
 
 
-	// { canActivate: [AuthGuard], path: 'requests', component: RequestListComponent },
-	{ path: 'requests', component: RequestListComponent },
+	{ canActivate: [AuthGuard], path: 'requests', component: RequestListComponent },
+// 	{ path: 'requests', component: RequestListComponent },
 
 
 ];

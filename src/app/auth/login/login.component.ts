@@ -26,12 +26,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() :  void {
   let data = {
-  'email' : this.email,
-  'password' : this.password
+    'email' : this.email,
+    'password' : this.password
   };
   this.hasError = false ;
   let that = this ;
-    this.httpx.post( Global.api('affiliate/login' ) , data).subscribe((response: any) => {
+    this.httpx.post( Global.api('artist/login' ) , data).subscribe((response: any) => {
       this.data = response.data;
       console.log("Failed reponse") ;
 

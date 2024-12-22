@@ -25,11 +25,5 @@ export abstract class ListControllerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLoadActivity(r: String ) {
-    //Communications 
-    this.httpLocal.get(Global.api(Global.API_ACTIVITY_LAST + '?reference=' + r)).subscribe((result: any) => {
-      this.activity = result.data;
-    })
-  }
 
 }
