@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
 
-  APP_WELCOME: 'http://162.241.127.138/affiliateapp/login.html',
-  APP_DASHBOARD: 'http://162.241.127.138/affiliateapp/dashboard.html',
+  APP_WELCOME: 'http://http://3.6.170.253:4202/login.html',
+  APP_DASHBOARD: 'http://http://3.6.170.253:4202/dashboard.html',
   AUTH_BEGIN: 'http://162.241.127.138/goldenage/auth/begin',
   API_ENDPOINT: 'http://162.241.127.138/goldenage/server.php/api/v1/',
   CHAT_API_ENDPOINT: 'http://162.241.127.138:8102/',
