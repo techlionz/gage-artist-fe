@@ -20,6 +20,8 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   public addCompanyUrl: string = 'affiliate-transactions/add';
   public pageOptions = Global.pageOptions();
   public msgModal: any;
+  public error_message = "" ;
+  public success_message = "" ;
   allImageFiles: { [key: string]: File[] } = {}; // Map to store files with keys as unique identifiers
 
   public commonError: string = "";
@@ -97,13 +99,15 @@ export class ListComponent extends ListControllerComponent implements OnInit {
       .pipe(
         catchError(error => {
           console.error('Upload failed', error);
-          alert('Error uploading images');
+          this.error_message = 'Failed to save the avatar image.' ;
           return of(null);
         })
       )
       .subscribe(response => {
         if (response) {
-          alert('Images uploaded successfully');
+          this.success_message = 'Avatar images saved successfully.' ;
+          this.imageStatus[player_id] = false
+          this.refreshList(this.pageOptions.pageEvents);
         }
       });
   }
