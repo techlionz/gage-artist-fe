@@ -77,6 +77,9 @@ export class ListComponent extends ListControllerComponent implements OnInit {
     this.imageStatus[player_id] = true ;
     const key = `${player_id}_${id}`; // Unique key for storing files
     this.allImageFiles[key] = images; // Store files under the specific key
+
+    this.error_message = ""
+    this.success_message = ""
   }
 
   // Save all images via an AJAX request
