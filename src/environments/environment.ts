@@ -4,8 +4,8 @@
 
 export const environment = {
 	production: false,
-	APP_WELCOME: 'http://localhost:4200/affiliateapp/login.html',
-	APP_DASHBOARD: 'http://localhost:4200/affiliateapp/dashboard',
+	APP_WELCOME: 'http://localhost:4202/login.html',
+	APP_DASHBOARD: 'http://localhost:4202/requests',
 	AUTH_BEGIN: 'http://localhost/gage-be/public/auth/begin',
 	API_ENDPOINT: 'http://localhost:1080/server.php/api/v1/',
 	CHAT_API_ENDPOINT: 'http://localhost:8102/',
