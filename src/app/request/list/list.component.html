@@ -64,47 +64,25 @@
 
                   <td>&nbsp;</td>
 
-                  <td  style="width: 160px;  float: left;">
-                    <div class="position-relative float-left">
-                      <small>Lobby</small>
-                      <div *ngIf="one.avatar1" >
-
-                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '0', $event)"></app-image-upload>
-
-                        <a target="_blank" href="{{ one.avatar1 }}">
-                          <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar1 }}" />
-                        </a>
-                      </div>
-
-                      <div *ngIf="! one.avatar1" >
-                        <div class="position-relative float-left " style=" height: 128px; width: 128px">
-                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '0', $event)"></app-image-upload>
-                        </div>
-                        <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
-                      </div>
-                    </div>
-
-                  </td>
-
 
                   <td  style="width: 160px;  float: left;">
                     <div class="position-relative float-left">
                       <small>Main</small>
-                      <div *ngIf="one.avatar4" >
+                      <div *ngIf="one.avatar" >
 
 
-                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '3', $event)"></app-image-upload>
+                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '0', $event)"></app-image-upload>
 
-                        <a target="_blank" href="{{ one.avatar4 }}">
-                          <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar4 }}" />
+                        <a target="_blank" href="{{ one.avatar }}">
+                          <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar }}" />
                         </a>
 
 
                       </div>
 
-                      <div *ngIf="! one.avatar4" >
+                      <div *ngIf="! one.avatar" >
                         <div class="position-relative float-left " style=" height: 128px; width: 128px">
-                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '3', $event)"></app-image-upload>
+                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '0', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent;padding-right: 10px" ></i> </span>
                       </div>
@@ -112,22 +90,22 @@
 
                   </td>
 
+
                   <td  style="width: 160px;  float: left;">
                     <div class="position-relative float-left">
-                      <small>Detail</small>
+                      <small>Lobby</small>
                       <div *ngIf="one.avatar2" >
 
-                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '1', $event)"></app-image-upload>
+                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '1', $event)"></app-image-upload>
 
                         <a target="_blank" href="{{ one.avatar2 }}">
                           <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar2 }}" />
                         </a>
-
                       </div>
 
                       <div *ngIf="! one.avatar2" >
-                        <div class="position-relative float-left " style="height: 128px; width: 128px">
-                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '1', $event)"></app-image-upload>
+                        <div class="position-relative float-left " style=" height: 128px; width: 128px">
+                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '1', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
                       </div>
@@ -136,26 +114,25 @@
                   </td>
 
 
+
                   <td  style="width: 160px;  float: left;">
                     <div class="position-relative float-left">
-                      <small>Extra</small>
+                      <small>Detail</small>
                       <div *ngIf="one.avatar3" >
 
-
-                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '2', $event)"></app-image-upload>
+                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '2', $event)"></app-image-upload>
 
                         <a target="_blank" href="{{ one.avatar3 }}">
                           <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar3 }}" />
                         </a>
 
-
                       </div>
 
                       <div *ngIf="! one.avatar3" >
-                        <div class="position-relative float-left " style=" height: 128px; width: 128px">
-                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.player_id, '2', $event)"></app-image-upload>
+                        <div class="position-relative float-left " style="height: 128px; width: 128px">
+                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '2', $event)"></app-image-upload>
                         </div>
-                        <span><i class="fa fa-download " style=" color: transparent;padding-right: 10px" ></i> </span>
+                        <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
                       </div>
                     </div>
 
@@ -163,16 +140,15 @@
 
 
 
-
                   <td>
                     <div>Player: <b> {{ one.nickname }}</b></div>
-                    <div>Last Requested On: <b> {{ one.requested_at }} </b></div>
+                    <div>Last Requested On: <b> {{ one.created_at }} </b></div>
                   </td>
 
                   <td>
                     <button
-                      *ngIf="imageStatus[one.player_id]"
-                      (click)="saveImages(one.player_id)"
+                      *ngIf="imageStatus[one.id]"
+                      (click)="saveImages(one.id)"
                       class="save-btn btn-round">
                       Save Image
                     </button>

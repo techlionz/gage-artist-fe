@@ -73,9 +73,9 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   }
 
   // Handle images uploaded from child components
-  onImagesUploaded(player_id: string, id: string, images: File[]) {
-    this.imageStatus[player_id] = true ;
-    const key = `${player_id}_${id}`; // Unique key for storing files
+  onImagesUploaded(id: string, ids: string, images: File[]) {
+    this.imageStatus[id] = true ;
+    const key = `${id}_${ids}`; // Unique key for storing files
     this.allImageFiles[key] = images; // Store files under the specific key
 
     this.error_message = ""
@@ -83,14 +83,14 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   }
 
   // Save all images via an AJAX request
-  saveImages(player_id: string) {
+  saveImages(id: string) {
     if (Object.keys(this.allImageFiles).length === 0) {
       alert('No images selected for upload!');
       return;
     }
 
     const formData = new FormData();
-    formData.append('player_id', player_id);
+    formData.append('id', id);
 
     for (const key in this.allImageFiles) {
       this.allImageFiles[key].forEach((file, index) => {
@@ -109,7 +109,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
       .subscribe(response => {
         if (response) {
           this.success_message = 'Avatar images saved successfully.' ;
-          this.imageStatus[player_id] = false
+          this.imageStatus[id] = false
           this.refreshList(this.pageOptions.pageEvents);
         }
       });
