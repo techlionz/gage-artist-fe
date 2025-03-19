@@ -5,6 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {LoginComponent} from './login/login.component';
 import {AfterLoginComponent} from './after-login/after-login.component';
 import {LogoutComponent} from './logout/logout.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {LogoutComponent} from './logout/logout.component';
 
     LoginComponent,
     AfterLoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
