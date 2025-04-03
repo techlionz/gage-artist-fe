@@ -7,3 +7,70 @@
   padding: 0 ;
   margin-top: 10px;
   }
+  
+  .btn-rounded {
+    border-radius: 30px; 
+  }
+  
+  .dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dropdown-menu li {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu li img {
+    margin-right: 10px;
+  }
+  
+  .dropdown-menu {
+    max-height: 400px;
+    overflow-y: auto; 
+    scroll-behavior: smooth;
+  }
+ 
+  .dropdown-search {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+    z-index: 2;
+    border:none;
+    border-bottom: 1px solid #ccc;
+   
+  }
+
+  .dropdown-list {
+    max-height: 400px;
+    overflow-y: auto; 
+    margin-top: 10px; 
+  }
+
+  .btn-gray {
+    background-color: gray !important;
+    color: white !important;
+  }
+  
+#dropdownMenuSelect {
+  background-color: #007bff !important; 
+  border: 1px solid #ced4da !important;
+}
+
+#dropdownMenuSelect:hover, 
+#dropdownMenuSelect:focus {
+  background-color: #007bff !important; 
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Remove hover effect from options */
+#dropdownMenuSelect option:hover {
+  background-color: transparent !important;
+}

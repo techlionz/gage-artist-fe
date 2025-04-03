@@ -1,0 +1,28 @@
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center w-100">View KYC Document</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="text-center">
+              <img id="kyc-photo" [src]="file" alt="KYC Document" class="img-fluid">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <form [formGroup]="artistForm">
+            <button (click)="setStatus('Approved')" data-dismiss="modal" formControlName="id_status" type="button" class="btn btn-success rounded" id="approve-btn" style="margin-right: 10px;">Approve</button>
+            <button formControlName="id_status" data-dismiss="modal" (click)="setStatus('Rejected')" type="button" class="btn btn-danger rounded" id="reject-btn" style="margin-right: 10px;" >Reject</button>
+            <button type="button" class="btn btn-default rounded" data-dismiss="modal" style="margin-right: 10px;" >Close</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
