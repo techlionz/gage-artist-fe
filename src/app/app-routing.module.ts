@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { AfterLoginComponent } from './auth/after-login/after-login.component';
+import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 
 const routes: Routes = [
 	{ path: 'login', component: LoginComponent, outlet: 'auth' },
@@ -21,6 +22,7 @@ const routes: Routes = [
 	{ canActivate: [AuthGuard], path: 'requests', component: RequestListComponent },
 // 	{ path: 'requests', component: RequestListComponent },
 
+	{ canActivate: [AuthGuard], path: 'change-password', component: ChangePasswordComponent },	
 
 ];
 
