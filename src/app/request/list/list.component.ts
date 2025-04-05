@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-list',
@@ -34,6 +35,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   public commonError: string = "";
 
   constructor(
+    private toastr: ToastrService,
     private httpx: HttpxService,
     private dialog: MatDialog,
     private location: Location,
@@ -64,7 +66,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   override ngOnInit(): void {
     super.ngOnInit();
     this.refreshList(this.pageOptions.pageEvents);
-    this.fetchFlags();
+    this.fetchFlags();  
   }
 
   handlePageEvent(event: PageEvent) {
@@ -138,7 +140,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
           this.artistForm.reset();
           setTimeout(() => {
             this.error_message = "" ;
-          }, 2000)
+          }, 3000)
           return of(null);
           
         })
@@ -152,9 +154,21 @@ export class ListComponent extends ListControllerComponent implements OnInit {
           this.artistForm.reset();
           setTimeout(() => {
             this.success_message = "" ;
-          }, 2000)
+          }, 3000)
         }
       });
+  }
+
+  onRealNameChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value;
+    this.artistForm.patchValue({ real_name: value });
+  }
+
+  onNickNameChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const value = inputElement.value;
+    this.artistForm.patchValue({ nickname: value });
   }
 
   toggleDropdown() {
@@ -169,12 +183,16 @@ export class ListComponent extends ListControllerComponent implements OnInit {
 
   handleStatusSelected(status: string) {
     this.selectedStatus = status; 
-    console.log("Selected Status:", this.selectedStatus);
     this.artistForm.patchValue({ id_status: this.selectedStatus });
+    // console.log("selected", status)
+    this.toastr.success('Status Changed to ' + status);
   }
   enableEdit(id: string) {
     this.isEditing = id;
     this.artistForm.enable();
+    this.artistForm.patchValue({ country: '' });
+    this.artistForm.reset();
+    this.isDropdownOpen = false;
   }
 
   closeEdit(){
@@ -183,7 +201,9 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   }
 
   onFaceStatusChange(event: any) {
-    this.artistForm.patchValue({ face_status: event.target.value }); 
+    this.artistForm.patchValue({ face_status: event.target.value });
+    // console.log("face")
+    this.toastr.success('Status Changed to ' + event.target.value); 
 }
 
 setStatus(status: string) {

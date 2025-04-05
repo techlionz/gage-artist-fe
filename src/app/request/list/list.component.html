@@ -53,7 +53,7 @@
 							<div>
                 
                 <div *ngFor="let one of records;" style="display: flex; width: 100%;padding-top: 30px; border: 1px solid black;">
-                  <form style="display: flex;justify-content: space-evenly;width: 100%;" (ngSubmit)="saveChanges(one.id)" >
+                  <form [formGroup]="artistForm" style="display: flex;justify-content: space-evenly;width: 100%;" (ngSubmit)="saveChanges(one.id)" >
                   <!-- USER PHOTO -->
                   <div style="width: 21%;display: flex; padding-left: 0px;">
 
@@ -101,16 +101,16 @@
                   </div>
 
                   <div style="padding-top: 20px;">
-                    <form [formGroup]="artistForm">
+                    <form>
                       <div class="form-group" >
                         <label for="realName">Real Name</label>
-                        <input type="text" class="form-control" style="width: 220px;" id="realName" formControlName="real_name" *ngIf="isEditing === one.id"/>
+                        <input type="text" class="form-control" style="width: 220px;" (input)="onRealNameChange($event)" [value]="one.real_name" id="realName"  *ngIf="isEditing === one.id"/>
                         <!-- Read-only display -->
                         <input type="text" class="form-control" style="width: 220px;" id="realName" [value]="one.real_name" readonly *ngIf="isEditing !== one.id"/>
                       </div>
                       <div class="form-group">
                         <label for="nickname">Nickname</label>
-                        <input type="text" class="form-control" style="width: 220px;" id="nickname" formControlName="nickname" *ngIf="isEditing === one.id"/>
+                        <input type="text" class="form-control" style="width: 220px;" (input)="onNickNameChange($event)" id="nickname" [value]="one.nickname" *ngIf="isEditing === one.id"/>
                         <!-- Read-only display -->
                         <input type="text" class="form-control" style="width: 220px;" id="nickname" [value]="one.nickname" readonly *ngIf="isEditing !== one.id"/>
                       </div>
@@ -154,7 +154,7 @@
                           </button>
                           <div class="dropdown" [ngClass]="{ 'show': isDropdownOpen }" *ngIf="isEditing === one.id">
                             <button class="btn  dropdown-toggle" type="button" (click)="toggleDropdown()" style="border: 1px solid gray;">
-                              <img [src]="artistForm.value.flag" class="me-2" style="width: 24px; height: 24px;">
+                              <img [src]="artistForm.value.flag" class="me-2" style="width: 24px; height: 24px;"  *ngIf="artistForm.value.country" >
                               {{ artistForm.value.country || 'Select a country' }}
                             </button>
                             <div class="dropdown-menu show" *ngIf="isDropdownOpen">
