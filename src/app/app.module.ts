@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FragmentsModule } from './fragments/fragments.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,11 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     BaseModule,
     FragmentsModule,
     RequestModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      timeOut: 2000,
+      progressBar: true,
+    }),
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

@@ -23,6 +23,5 @@ export class PopupComponent {
     this.artistForm.patchValue({ id_status: status });
     this.statusSelected.emit(status);
     $('#myModal').modal('hide'); 
-    console.log("status", status)
   }
 }

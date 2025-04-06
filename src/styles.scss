@@ -40,3 +40,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 a{
   text-decoration: none !important;
 }
+
+@import '~ngx-toastr/toastr.css';
+#toast-container {
+  position: fixed !important; 
+  z-index: 9999; 
+}
