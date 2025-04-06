@@ -52,7 +52,7 @@
 							</div>
 							<div>
 
-                <div *ngFor="let one of records;" style="display: flex; width: 100%;padding-top: 30px; border: 1px solid black;">
+                <div *ngFor="let one of records;" style="display: flex; width: 100%;padding-top: 10px; border: 1px solid #ddd;">
                   <form [formGroup]="artistForm" style="display: flex;justify-content: space-evenly;width: 100%;" (ngSubmit)="saveChanges(one.id)" >
                   <!-- USER PHOTO -->
                   <div style="width: 21%;display: flex; padding-left: 0px;">
@@ -202,7 +202,7 @@
                   </div>
 
                   <!-- AVATARS VIEW -->
-                  <div style="width: 45%; padding-left: 0;display: flex;justify-content: space-evenly;border-left: 1px solid gray;">
+                  <div style="width: 45%; padding-left: 10px;margin-left: 10px;display: flex;justify-content: space-evenly;border-left: 1px solid #ddd;">
                   <div  style="width: 160px;  float: left;">
                     <div class="position-relative float-left">
                       <small>Main</small>
@@ -278,7 +278,7 @@
                 </div>
 
                 <!-- ACTIONS -->
-                <div style="width: 15%; display: flex; justify-content: center; align-items: center; padding-left: 10px; padding-right: 5px;flex-direction: column;border-left: 1px solid gray;">
+                <div style="width: 15%; display: flex; justify-content: center; align-items: center; padding-left: 10px; padding-right: 5px;flex-direction: column;border-left: 1px solid #ddd;">
                   <button type="button" class="btn btn-primary" style="width: 150px;" (click)="enableEdit(one.id, one)" *ngIf="isEditing != one.id">
                     Edit
                   </button>
