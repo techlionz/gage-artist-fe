@@ -19,9 +19,9 @@ import { ToastrService } from 'ngx-toastr';
 export class ListComponent extends ListControllerComponent implements OnInit {
 
   isDropdownOpen = false;
-  selectedFaceStatus: { [key: string]: string } = {}; 
+  selectedFaceStatus: { [key: string]: string } = {};
   artistForm!: FormGroup;
-  isEditing: string | null =null; 
+  isEditing: string | null =null;
   public records: any;
   public addCompanyUrl: string = 'affiliate-transactions/add';
   public pageOptions = Global.pageOptions();
@@ -66,7 +66,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   override ngOnInit(): void {
     super.ngOnInit();
     this.refreshList(this.pageOptions.pageEvents);
-    this.fetchFlags();  
+    this.fetchFlags();
   }
 
   handlePageEvent(event: PageEvent) {
@@ -104,15 +104,27 @@ export class ListComponent extends ListControllerComponent implements OnInit {
 
   // Save all images via an AJAX request
   saveChanges(id: string) {
-  
+
   console.log("Nickname Value: ", this.artistForm.get('nickname')?.value);
     const formData = new FormData();
     formData.append('id', id);
 
+
+    formData.append('real_name' ,this.artistForm.get('real_name')?.value );
+    formData.append('nickname' , this.artistForm.get('nickname')?.value) ;
+    formData.append('id_status' , this.artistForm.get('id_status')?.value) ;
+    formData.append('country' ,this.artistForm.get('country')?.value) ;
+    formData.append('face_status' , this.artistForm.get('face_status')?.value );
+
+    console.log("Made FORM")
+    for (const [key, value] of (formData as any).entries()) {
+      console.log(`${key}:`, value);
+    }
+
     let hasFiles = false;
 
     for (const key in this.allImageFiles) {
-      if (this.allImageFiles[key].length > 0) { 
+      if (this.allImageFiles[key].length > 0) {
         hasFiles = true;
         this.allImageFiles[key].forEach((file, index) => {
         formData.append(`images[${key}]`, file, file.name);
@@ -121,13 +133,16 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   }
 
     const requestBody = {
-      real_name: this.artistForm.get('real_name')?.value || null, 
-      nickname: this.artistForm.get('nickname')?.value || null,  
+      real_name: this.artistForm.get('real_name')?.value || null,
+      nickname: this.artistForm.get('nickname')?.value || null,
       id: id,
       face_status: this.artistForm.get('face_status')?.value || null,
       id_status: this.artistForm.get('id_status')?.value || null,
       country: this.artistForm.get('country')?.value || null,
     };
+
+    console.log(formData)
+    console.log(requestBody)
 
     const requestPayload = hasFiles ? formData : JSON.stringify(requestBody);
     const requestOptions = hasFiles ? {} : { headers: { 'Content-Type': 'application/json' } };
@@ -142,7 +157,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
             this.error_message = "" ;
           }, 3000)
           return of(null);
-          
+
         })
       )
       .subscribe((response: any ) => {
@@ -150,7 +165,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
           this.success_message = response.data
           this.imageStatus[id] = false
           this.refreshList(this.pageOptions.pageEvents);
-          this.isEditing = null; 
+          this.isEditing = null;
           this.artistForm.reset();
           setTimeout(() => {
             this.success_message = "" ;
@@ -182,28 +197,36 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   selectedStatus: string = '';
 
   handleStatusSelected(status: string) {
-    this.selectedStatus = status; 
+    this.selectedStatus = status;
     this.artistForm.patchValue({ id_status: this.selectedStatus });
     // console.log("selected", status)
-    this.toastr.success('Status Changed to ' + status);
+    //this.toastr.success('Status Changed to ' + status);
   }
-  enableEdit(id: string) {
+  enableEdit(id: string, one: any) {
+    console.log(one)
     this.isEditing = id;
     this.artistForm.enable();
-    this.artistForm.patchValue({ country: '' });
-    this.artistForm.reset();
+    this.artistForm.patchValue( {  real_name: one.real_name,
+                                   nickname: one.nickname,
+                                   id_status: one.id_status,
+                                   country: one.country,
+                                   face_status: one.face_status,
+                                   file: one.file,
+                                   flag: one.flag,
+                                 } );
+    //this.artistForm.reset();
     this.isDropdownOpen = false;
   }
 
   closeEdit(){
     this.isEditing = null;
-    this.artistForm.disable(); 
+    this.artistForm.disable();
   }
 
   onFaceStatusChange(event: any) {
     this.artistForm.patchValue({ face_status: event.target.value });
     // console.log("face")
-    this.toastr.success('Status Changed to ' + event.target.value); 
+    //this.toastr.success('Status Changed to ' + event.target.value);
 }
 
 setStatus(status: string) {
@@ -216,7 +239,7 @@ setStatus(status: string) {
     this.httpx.get(Global.api('flags')).subscribe((data: any) => {
       this.flags = data.data;
       // console.log("flags", this.flags);
-      this.filteredFlags = [...this.flags]; 
+      this.filteredFlags = [...this.flags];
       // console.log("Flags data fetched:", this.flags);
     });
   }

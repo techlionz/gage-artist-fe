@@ -47,104 +47,122 @@
                     <sortable style="font-size: medium;" (toggle)="onSort($event)" caption="Actions" name="ReqInfo">
                     </sortable>
                   </div>
-  
+
 								</div>
 							</div>
 							<div>
-                
+
                 <div *ngFor="let one of records;" style="display: flex; width: 100%;padding-top: 30px; border: 1px solid black;">
                   <form [formGroup]="artistForm" style="display: flex;justify-content: space-evenly;width: 100%;" (ngSubmit)="saveChanges(one.id)" >
                   <!-- USER PHOTO -->
                   <div style="width: 21%;display: flex; padding-left: 0px;">
 
                     <div style="display: flex;flex-direction: column;">
-                    <div style="display: flex; justify-content: center;align-items: center;">
+                      <div style="display: flex; align-items: center;">
+                        <small>User Photo</small>
+                      </div>
+                      <div style="display: flex; align-items: center;">
 
-                    <div>
-                    <div class="position-relative" style="display: flex;flex-direction: column;">
-                      <small>User Photo</small>
-                      <img style="width: 128px; height: 128px; " src="{{ one.photo }}" />
-                    </div>
-                    <div *ngIf="one.photo" >
-                      <a target="_blank" href="{{ one.photo }}">
-                      <span><i class="fa fa-download " style="padding-right: 10px" ></i> </span>
-                      </a>
-                    </div>
-                  </div>
+                          <div class="position-relative" style="display: flex; flex-direction: row;">
 
-                  <div style="margin-left: 10px;">
-                    <div class="btn"
-                        [ngClass]="{
-                            'btn-gray': !one.face_status || one.face_status === 'Pending', 
-                            'btn-danger': one.face_status === 'Rejected',
-                            'btn-success': one.face_status === 'Approved'
-                        }"
-                        style="width: 100px;font-size: 13px;"
-                        *ngIf="isEditing !== one.id">
-                      {{ one.face_status ?? 'Pending' }}
+                            <img style="width: 128px; height: 128px; " src="{{ one.photo }}" />
+                            <span *ngIf="one.photo" >
+                              <a target="_blank" href="{{ one.photo }}">
+                                <span><i class="fa fa-download " style="padding-left: 10px" ></i> </span>
+                              </a>
+                            </span>
+                          </div>
+
+
                     </div>
 
-                    <select class="form-control btn btn-primary"
-                            id="dropdownMenuSelect"
-                            style="width: 105px; color: white; border: 1px solid #ced4da;font-size: 13px;"
-                            *ngIf="isEditing === one.id"
-                            (change)="onFaceStatusChange($event)">
+
+                    <div style="margin-top: 10px; width: 200px;">
+                      <div class=""
+                           [ngClass]="{
+                          'text-gray': !one.face_status || one.face_status === 'Pending',
+                          'text-danger': one.face_status === 'Rejected',
+                          'text-success': one.face_status === 'Approved'
+                      }"
+                           style="width: 100px;font-size: 13px;"
+                           *ngIf="isEditing !== one.id">
+                        {{ one.face_status ?? 'Pending' }}
+                      </div>
+
+                      <select class="form-control form-select"
+                              id="dropdownMenuSelect"
+                              style="width: 105px;  border: 1px solid #ced4da;font-size: 13px;"
+                              value="{{artistForm.value.face_status}}"
+                              *ngIf="isEditing === one.id"
+                              (change)="onFaceStatusChange($event)">
                         <option value="" disabled selected>Select Status</option>
                         <option value="Rejected">Rejected</option>
                         <option value="Approved">Approved</option>
-                    </select>
+                      </select>
 
-                  </div>
-                               
-                  
+                    </div>
 
-                  </div>
+                    <div style="padding-top: 20px;">
+                      <form>
+                        <div class="form-group" >
+                          <label for="realName">Real Name</label>
+                          <input type="text" class="form-control" style="width: 220px;" (input)="onRealNameChange($event)" [value]="artistForm.value.real_name" id="realName"  *ngIf="isEditing === one.id"/>
+                          <!-- Read-only display -->
+                          <input type="text" class="form-control" style="width: 220px;" id="realName" [value]="one.real_name" readonly *ngIf="isEditing !== one.id"/>
+                        </div>
+                        <div class="form-group">
+                          <label for="nickname">Nickname</label>
+                          <input type="text" class="form-control" style="width: 220px;" (input)="onNickNameChange($event)" id="nickname" [value]="artistForm.value.nickname" *ngIf="isEditing === one.id"/>
+                          <!-- Read-only display -->
+                          <input type="text" class="form-control" style="width: 220px;" id="nickname" [value]="one.nickname" readonly *ngIf="isEditing !== one.id"/>
+                        </div>
+                      </form>
+                    </div>
 
-                  <div style="padding-top: 20px;">
-                    <form>
-                      <div class="form-group" >
-                        <label for="realName">Real Name</label>
-                        <input type="text" class="form-control" style="width: 220px;" (input)="onRealNameChange($event)" [value]="one.real_name" id="realName"  *ngIf="isEditing === one.id"/>
-                        <!-- Read-only display -->
-                        <input type="text" class="form-control" style="width: 220px;" id="realName" [value]="one.real_name" readonly *ngIf="isEditing !== one.id"/>
-                      </div>
-                      <div class="form-group">
-                        <label for="nickname">Nickname</label>
-                        <input type="text" class="form-control" style="width: 220px;" (input)="onNickNameChange($event)" id="nickname" [value]="one.nickname" *ngIf="isEditing === one.id"/>
-                        <!-- Read-only display -->
-                        <input type="text" class="form-control" style="width: 220px;" id="nickname" [value]="one.nickname" readonly *ngIf="isEditing !== one.id"/>
-                      </div>
-                    </form>
-                  </div>
-                  
 
                 </div>
 
                   </div>
 
                   <!-- KYC ID PROOF -->
-                  <div style="display: flex;width: 19%;padding-left: 10px;border-left: 1px solid gray;">
+                  <div style="display: flex;width: 19%;padding-left: 10px;margin-left: 10px;border-left: 1px solid #ddd;">
 
                     <div style="width: 160px;">
                       <div class="position-relative">
                         <small>ID Photo</small>
                         <img style="width: 128px; height: 128px; cursor: pointer; " src="{{ one.id_photo }}" (click)="setImage(one.id_photo)"  data-toggle="modal" data-target="#myModal"  />
+                        <span *ngIf="one.id_photo" >
+                            <a target="_blank" href="{{ one.id_photo }}">
+                              <span><i class="fa fa-download " style="padding-left: 10px; vertical-align: top;" ></i> </span>
+                            </a>
+                          </span>
                       </div>
                       <div *ngIf="one.photo" >
                         <a target="_blank" href="{{ one.id_photo }}">
                         </a>
                       </div>
 
-                      <div style="padding-top: 30px;">
-                        <div style="width: 100px;font-size: 13px;"
-                            class="btn"
+                      <div style="padding-top: 10px;">
+                        <div *ngIf="isEditing == one.id" style="width: 100px;font-size: 13px;"
+                            class=""
                             [ngClass]="{
-                                'btn-secondary': one.id_status === 'Pending' || !one.id_status,
-                                'btn-danger': one.id_status === 'Rejected',
-                                'btn-success': one.id_status === 'Approved'
+                                'text-secondary': artistForm.value.id_status === 'Pending' || !artistForm.value.id_status,
+                                'text-danger': artistForm.value.id_status === 'Rejected',
+                                'text-success': artistForm.value.id_status === 'Approved'
+                            }">
+                          {{ artistForm.value.id_status }}
+                        </div>
+
+                        <div *ngIf="isEditing != one.id" style="width: 100px;font-size: 13px;"
+                             class=""
+                             [ngClass]="{
+                                'text-secondary': one.id_status === 'Pending' || !one.id_status,
+                                'text-danger': one.id_status === 'Rejected',
+                                'text-success': one.id_status === 'Approved'
                             }">
                           {{ one.id_status ?? 'Pending' }}
                         </div>
+
 
 
                         <div class="dropup" style="margin-top: 20px;">
@@ -154,7 +172,6 @@
                           </button>
                           <div class="dropdown" [ngClass]="{ 'show': isDropdownOpen }" *ngIf="isEditing === one.id">
                             <button class="btn  dropdown-toggle" type="button" (click)="toggleDropdown()" style="border: 1px solid gray;">
-                              <img [src]="artistForm.value.flag" class="me-2" style="width: 24px; height: 24px;"  *ngIf="artistForm.value.country" >
                               {{ artistForm.value.country || 'Select a country' }}
                             </button>
                             <div class="dropdown-menu show" *ngIf="isDropdownOpen">
@@ -173,17 +190,17 @@
                               </div>
                             </div>
                           </div>
-                          
-                        </div>  
-                        
-                        
+
+                        </div>
+
+
                       </div>
 
                     </div>
-                    
-                    
-                  </div> 
-                  
+
+
+                  </div>
+
                   <!-- AVATARS VIEW -->
                   <div style="width: 45%; padding-left: 0;display: flex;justify-content: space-evenly;border-left: 1px solid gray;">
                   <div  style="width: 160px;  float: left;">
@@ -262,21 +279,21 @@
 
                 <!-- ACTIONS -->
                 <div style="width: 15%; display: flex; justify-content: center; align-items: center; padding-left: 10px; padding-right: 5px;flex-direction: column;border-left: 1px solid gray;">
-                  <button type="button" class="btn btn-primary" style="width: 150px;" (click)="enableEdit(one.id)" *ngIf="isEditing != one.id">
+                  <button type="button" class="btn btn-primary" style="width: 150px;" (click)="enableEdit(one.id, one)" *ngIf="isEditing != one.id">
                     Edit
                   </button>
-                  <button type="submit" class="btn btn-primary" style="width: 150px;text-align:center;" *ngIf="isEditing===one.id">
+                  <button type="submit" class="btn btn-success" style="width: 150px;text-align:center;" *ngIf="isEditing===one.id">
                     Save Changes
                   </button>
-                  <button class="btn btn-primary" type="button" *ngIf="isEditing === one.id" style="width: 150px;margin-top: 10px;" (click)="closeEdit()" >Cancel</button>
+                  <button class="btn btn-secondary" type="button" *ngIf="isEditing === one.id" style="width: 150px;margin-top: 10px;" (click)="closeEdit()" >Cancel</button>
                 </div>
-                
+
 
               </form>
                 </div>
 
                 <div>
-                  
+
                 </div>
 
 
