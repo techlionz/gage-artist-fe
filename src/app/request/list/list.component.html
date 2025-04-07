@@ -63,11 +63,12 @@
                           <div class="position-relative" style="display: flex; flex-direction: row;">
 
                             <img style="width: 128px; height: 128px; " src="{{ one.photo }}" />
-                            <span *ngIf="one.photo" >
-                              <a target="_blank" href="{{ one.photo }}">
-                                <span><i class="fa fa-download " style="padding-left: 10px" ></i> </span>
-                              </a>
+                            <span *ngIf="one.photo">
+                              <button (click)="downloadImage(one.photo, one.id, '1')" style="background: transparent;border: none;">
+                                <i class="fa fa-download" style="padding-left: 10px;color:blue;"></i>
+                              </button>
                             </span>
+                            
                           </div>
 
 
@@ -127,12 +128,14 @@
                     <div style="width: 160px;">
                       <div class="position-relative">
                         <small>ID Photo</small>
+                        <div style="display: flex;flex-direction: row;">
                         <img style="width: 128px; height: 128px; cursor: pointer; " src="{{ one.id_photo }}" (click)="setImage(one.id_photo)"  data-toggle="modal" data-target="#myModal"  />
-                        <span *ngIf="one.id_photo" >
-                            <a target="_blank" href="{{ one.id_photo }}">
-                              <span><i class="fa fa-download " style="padding-left: 10px; vertical-align: top;" ></i> </span>
-                            </a>
-                          </span>
+                        <span *ngIf="one.photo">
+                          <button (click)="downloadImage(one.id_photo, one.id, '2')" style="background: transparent;border: none;">
+                            <i class="fa fa-download" style="padding-left: 10px;color:blue;"></i>
+                          </button>
+                        </span>
+                      </div>
                       </div>
                       <div *ngIf="one.photo" >
                         <a target="_blank" href="{{ one.id_photo }}">
@@ -140,24 +143,29 @@
                       </div>
 
                       <div style="padding-top: 10px;">
-                        <div *ngIf="isEditing == one.id" style="width: 100px;font-size: 13px;"
-                            class=""
-                            [ngClass]="{
-                                'text-secondary': artistForm.value.id_status === 'Pending' || !artistForm.value.id_status,
-                                'text-danger': artistForm.value.id_status === 'Rejected',
-                                'text-success': artistForm.value.id_status === 'Approved'
-                            }">
-                          {{ artistForm.value.id_status }}
-                        </div>
-
-                        <div *ngIf="isEditing != one.id" style="width: 100px;font-size: 13px;"
-                             class=""
-                             [ngClass]="{
-                                'text-secondary': one.id_status === 'Pending' || !one.id_status,
-                                'text-danger': one.id_status === 'Rejected',
-                                'text-success': one.id_status === 'Approved'
-                            }">
-                          {{ one.id_status ?? 'Pending' }}
+                        <div style="margin-top: 10px; width: 200px;">
+                          <div class=""
+                               [ngClass]="{
+                              'text-gray': !one.id_status || one.id_status === 'Pending',
+                              'text-danger': one.id_status === 'Rejected',
+                              'text-success': one.id_status === 'Approved'
+                          }"
+                               style="width: 100px;font-size: 13px;"
+                               *ngIf="isEditing !== one.id">
+                            {{ one.id_status ?? 'Pending' }}
+                          </div>
+    
+                          <select class="form-control form-select"
+                                  id="dropdownMenuSelect"
+                                  style="width: 105px;  border: 1px solid #ced4da;font-size: 13px;"
+                                  value="{{artistForm.value.id_status}}"
+                                  *ngIf="isEditing === one.id"
+                                  (change)="onIdStatusChange($event)">
+                            <option value="" disabled selected>Select Status</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Approved">Approved</option>
+                          </select>
+    
                         </div>
 
 
@@ -322,4 +330,4 @@
 <!-- /.content -->
 
                     <!-- POPUP MODAL -->
-<app-popup *ngIf="isEditing != null" [file]="artistForm.value.file" (statusSelected)="handleStatusSelected($event)"></app-popup>
+<app-popup *ngIf="isEditing != null" [file]="artistForm.value.file"></app-popup>

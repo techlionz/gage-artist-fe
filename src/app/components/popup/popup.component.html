@@ -14,11 +14,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <form [formGroup]="artistForm">
-            <button (click)="setStatus('Approved')" data-dismiss="modal" formControlName="id_status" type="button" class="btn btn-success rounded" id="approve-btn" style="margin-right: 10px;">Approve</button>
-            <button formControlName="id_status" data-dismiss="modal" (click)="setStatus('Rejected')" type="button" class="btn btn-danger rounded" id="reject-btn" style="margin-right: 10px;" >Reject</button>
             <button type="button" class="btn btn-default rounded" data-dismiss="modal" style="margin-right: 10px;" >Close</button>
-            </form>
           </div>
         </div>
       </div>

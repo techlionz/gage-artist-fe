@@ -194,14 +194,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
     console.log("image file: " + file)
   }
 
-  selectedStatus: string = '';
 
-  handleStatusSelected(status: string) {
-    this.selectedStatus = status;
-    this.artistForm.patchValue({ id_status: this.selectedStatus });
-    // console.log("selected", status)
-    //this.toastr.success('Status Changed to ' + status);
-  }
   enableEdit(id: string, one: any) {
     console.log(one)
     this.isEditing = id;
@@ -228,6 +221,10 @@ export class ListComponent extends ListControllerComponent implements OnInit {
     // console.log("face")
     //this.toastr.success('Status Changed to ' + event.target.value);
 }
+
+  onIdStatusChange(event: any) {
+    this.artistForm.patchValue({ id_status: event.target.value });
+  }
 
 setStatus(status: string) {
   this.artistForm.patchValue({ id_status: status });
@@ -258,4 +255,26 @@ setStatus(status: string) {
     this.artistForm.patchValue({ flag: flag });
     this.isDropdownOpen = false;
   }
+
+  downloadImage(url: string, id: string, flag: string) {
+    fetch(url, { mode: 'cors' })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const a = document.createElement('a');
+        const objectUrl = URL.createObjectURL(blob);
+        a.href = objectUrl;
+        a.download = flag === '1' ? `${id}.jpg` : `ID_Proof_${id}.jpg`;
+        a.click();
+        URL.revokeObjectURL(objectUrl);
+      })
+      .catch(error => {
+        console.error('Download failed:', error);
+      });
+  }
+  
 }
