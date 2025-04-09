@@ -28,7 +28,7 @@
 						<div class="table table-striped" style="padding-top: 20px; display: flex;width: 100%;flex-direction: column;">
 							<div class="table-light" style="width: 100%;">
 								<div style="display: flex;justify-content: space-between;width: 100%;">
-									<div style="width: 20%;padding-left: 14px;">
+									<div style="width: 18%;padding-left: 14px;">
                     Request Photo
 									</div>
                   <!-- <th></th> -->
@@ -52,7 +52,7 @@
                 <div *ngFor="let one of records;" style="display: flex; width: 100%;padding-top: 10px; border: 1px solid #ddd;">
                   <form [formGroup]="artistForm" style="display: flex;justify-content: space-evenly;width: 100%;" (ngSubmit)="saveChanges(one.id)" >
                   <!-- USER PHOTO -->
-                  <div style="width: 21%;display: flex; padding-left: 0px;">
+                  <div style="width: 18%;display: flex; padding-left: 0px;">
 
                     <div style="display: flex;flex-direction: column;">
                       <div style="display: flex; align-items: center;">
@@ -68,7 +68,7 @@
                                 <i class="fa fa-download" style="padding-left: 10px;color:blue;"></i>
                               </button>
                             </span>
-                            
+
                           </div>
 
 
@@ -154,7 +154,7 @@
                                *ngIf="isEditing !== one.id">
                             {{ one.id_status ?? 'Pending' }}
                           </div>
-    
+
                           <select class="form-control form-select"
                                   id="dropdownMenuSelect"
                                   style="width: 105px;  border: 1px solid #ced4da;font-size: 13px;"
@@ -165,13 +165,13 @@
                             <option value="Rejected">Rejected</option>
                             <option value="Approved">Approved</option>
                           </select>
-    
+
                         </div>
 
 
 
                         <div class="dropup" style="margin-top: 20px;">
-                          <button *ngIf="isEditing != one.id" class="dropdown-toggle" type="button" id="dropdownMenuButton" style="background: none; border: none; display: flex; align-items: center;">
+                          <button *ngIf="isEditing != one.id" class="" type="button" id="dropdownMenuButton" style="background: none; border: none; display: flex; align-items: center;">
                             <img [src]="one.file" alt="{{ one.country }}" style="width: 32px; height: 32px;" />
                             <span style="font-weight: 400; margin-left: 10px;" >{{ one.country ?? 'Not Selected' }}</span>
                           </button>
@@ -185,7 +185,7 @@
                                 <input type="text" class="form-control" placeholder="Search country..." (input)="filterCountries($event)">
                               </div>
                               <!-- Scrollable List -->
-                              <div class="dropdown-list">
+                              <div class="dropdown-list" style="max-height: auto;">
                                 <ul class="list-unstyled m-0 p-0">
                                   <li *ngFor="let country of filteredFlags" class="dropdown-item" (click)="selectCountry(country.country, country.flag)">
                                     <img [src]="country.flag" alt="{{ country.country }}" class="me-2" style="width: 24px; height: 24px;">
