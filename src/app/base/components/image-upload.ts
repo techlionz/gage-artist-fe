@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileSystemFileEntry, NgxFileDropEntry } from 'ngx-file-drop';
 
 @Component({
   selector: 'app-image-upload',
   template: `
-    <div class="drag-drop-container" *ngIf="imagePreviews.length === 0" (click)="fileInput.click()">
+    <div class="drag-drop-container" *ngIf="imagePreviews.length === 0" (click)="fileInput.click()" [ngStyle]="{ cursor: isEditable ? 'pointer' : 'default' }" >
     <small>Upload Image</small>
       <ngx-file-drop (onFileDrop)="onFileDrop($event)">
         <div class="file-drop-zone">
@@ -28,7 +28,7 @@ import { FileSystemFileEntry, NgxFileDropEntry } from 'ngx-file-drop';
         padding: 5px;
         text-align: center;
         border-radius: 10px;
-        cursor: pointer;
+        // cursor: pointer;
       }
       .file-drop-zone {
         font-size: 16px;
@@ -85,7 +85,7 @@ import { FileSystemFileEntry, NgxFileDropEntry } from 'ngx-file-drop';
 export class ImageUploadComponent {
   imagePreviews: string[] = []; // Array to hold image preview URLs
   imageFiles: File[] = []; // Array to hold the image files
-
+  @Input() isEditable: boolean = false;
   @Output() imagesUploaded = new EventEmitter<File[]>(); // Emit an array of image files
 
   // Handle the file drop event

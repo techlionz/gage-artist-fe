@@ -78,6 +78,8 @@ export class ListComponent extends ListControllerComponent implements OnInit {
 
     this.httpx.get(Global.api('artist/requests' + '?search=' + this.search + params)).subscribe((data: any) => {
       this.records = data.data;
+      console.log("datas", this.records)
+      console.log("count", this.records.length)
       this.pageOptions.pageEvents.length = data.recordsFiltered;
     });
   }
