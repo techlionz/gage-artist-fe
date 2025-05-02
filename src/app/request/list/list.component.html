@@ -143,7 +143,7 @@
                       </div>
 
                       <div style="padding-top: 10px;">
-                        <div style="margin-top: 10px; width: 200px;">
+                        <div style="width: 200px;">
                           <div class=""
                                [ngClass]="{
                               'text-gray': !one.id_status || one.id_status === 'Pending',
@@ -185,7 +185,7 @@
                                 <input type="text" class="form-control" placeholder="Search country..." (input)="filterCountries($event)">
                               </div>
                               <!-- Scrollable List -->
-                              <div class="dropdown-list" style="max-height: auto;">
+                              <div class="dropdown-list" style="max-height: none;">
                                 <ul class="list-unstyled m-0 p-0">
                                   <li *ngFor="let country of filteredFlags" class="dropdown-item" (click)="selectCountry(country.country, country.flag)">
                                     <img [src]="country.flag" alt="{{ country.country }}" class="me-2" style="width: 24px; height: 24px;">
