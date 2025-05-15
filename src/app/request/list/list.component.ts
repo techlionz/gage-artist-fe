@@ -31,6 +31,9 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   allImageFiles: { [key: string]: File[] } = {}; // Map to store files with keys as unique identifiers
   flags: Array<{ country: string; flag: string }> = [];
   filteredFlags: Array<{ country: string; flag: string }> = [];
+  appendNoCache(url: string): string {
+    return url + (url.includes('?') ? '&' : '?') + 'nocache=' + Math.random();
+  }
 
   public commonError: string = "";
 
@@ -77,7 +80,14 @@ export class ListComponent extends ListControllerComponent implements OnInit {
     const params = '&pageIndex=' + event.pageIndex + '&pageSize=' + event.pageSize + '&sort=' + this.sort.name + '&order=' + this.sort.order;
 
     this.httpx.get(Global.api('artist/requests' + '?search=' + this.search + params)).subscribe((data: any) => {
-      this.records = data.data;
+      this.records = data.data.map((record: any) => ({
+      ...record,
+      photo: this.appendNoCache(record.photo),
+      avatar: this.appendNoCache(record.avatar),
+      avatar2: this.appendNoCache(record.avatar2),
+      avatar3: this.appendNoCache(record.avatar3),
+      id_photo: this.appendNoCache(record.id_photo),
+    }));
       this.pageOptions.pageEvents.length = data.recordsFiltered;
     });
   }
