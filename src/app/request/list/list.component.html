@@ -64,7 +64,7 @@
 
                             <img style="width: 128px; height: 128px; " src="{{ one.photo }}" />
                             <span *ngIf="one.photo">
-                              <button (click)="downloadImage(one.photo, one.id, '1')" style="background: transparent;border: none;">
+                              <button (click)="downloadImage(one.photo, one.id, '1')" style="background: transparent;border: none;" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }">
                                 <i class="fa fa-download" style="padding-left: 10px;color:blue;"></i>
                               </button>
                             </span>
@@ -129,9 +129,9 @@
                       <div class="position-relative">
                         <small>ID Photo</small>
                         <div style="display: flex;flex-direction: row;">
-                        <img style="width: 128px; height: 128px; cursor: pointer; " src="{{ one.id_photo }}" (click)="setImage(one.id_photo)"  data-toggle="modal" data-target="#myModal"  />
+                        <img style="width: 128px; height: 128px;" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }" src="{{ one.id_photo }}" (click)="setImage(one.id_photo)"  data-toggle="modal" data-target="#myModal"  />
                         <span *ngIf="one.photo">
-                          <button (click)="downloadImage(one.id_photo, one.id, '2')" style="background: transparent;border: none;">
+                          <button (click)="downloadImage(one.id_photo, one.id, '2')" style="background: transparent;border: none;" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }">
                             <i class="fa fa-download" style="padding-left: 10px;color:blue;"></i>
                           </button>
                         </span>
@@ -171,7 +171,7 @@
 
 
                         <div class="dropup" style="margin-top: 20px;">
-                          <button *ngIf="isEditing != one.id" class="" type="button" id="dropdownMenuButton" style="background: none; border: none; display: flex; align-items: center;">
+                          <button *ngIf="isEditing != one.id" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }" type="button" id="dropdownMenuButton" style="background: none; border: none; display: flex; align-items: center;">
                             <img [src]="one.file" alt="{{ one.country }}" style="width: 32px; height: 32px;" />
                             <span style="font-weight: 400; margin-left: 10px;" >{{ one.country ?? 'Not Selected' }}</span>
                           </button>
@@ -209,23 +209,22 @@
                   <!-- AVATARS VIEW -->
                   <div style="width: 45%; padding-left: 10px;margin-left: 10px;display: flex;justify-content: space-evenly;border-left: 1px solid #ddd;">
                   <div  style="width: 160px;  float: left;">
-                    <div class="position-relative float-left">
+                    <div class="position-relative float-left" >
                       <small>Main</small>
                       <div *ngIf="one.avatar" >
 
-
-                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '0', $event)"></app-image-upload>
+                        <app-image-upload [isEditable]="isEditing === one.id"  (imagesUploaded)="onImagesUploaded(one.id, '0', $event)"></app-image-upload>
 
                         <a target="_blank" href="{{ one.avatar }}">
-                          <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar }}" />
+                          <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar }}" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }"  />
                         </a>
 
 
                       </div>
 
                       <div *ngIf="! one.avatar" >
-                        <div class="position-relative float-left " style=" height: 128px; width: 128px">
-                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '0', $event)"></app-image-upload>
+                        <div class="position-relative float-left" style=" height: 128px; width: 128px">
+                          <app-image-upload [isEditable]="isEditing === one.id" (imagesUploaded)="onImagesUploaded(one.id, '0', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent;padding-right: 10px" ></i> </span>
                       </div>
@@ -239,16 +238,16 @@
                       <small>Lobby</small>
                       <div *ngIf="one.avatar2" >
 
-                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '1', $event)"></app-image-upload>
+                        <app-image-upload [isEditable]="isEditing === one.id" (imagesUploaded)="onImagesUploaded(one.id, '1', $event)"></app-image-upload>
 
                         <a target="_blank" href="{{ one.avatar2 }}">
-                          <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar2 }}" />
+                          <img class="img-old" style="width: 128px; height: 128px;" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }"  src="{{ one.avatar2 }}" />
                         </a>
                       </div>
 
                       <div *ngIf="! one.avatar2" >
-                        <div class="position-relative float-left " style=" height: 128px; width: 128px">
-                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '1', $event)"></app-image-upload>
+                        <div class="position-relative float-left " style=" height: 128px; width: 128px" >
+                          <app-image-upload [isEditable]="isEditing === one.id" (imagesUploaded)="onImagesUploaded(one.id, '1', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
                       </div>
@@ -263,17 +262,17 @@
                       <small>Detail</small>
                       <div *ngIf="one.avatar3" >
 
-                        <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '2', $event)"></app-image-upload>
+                        <app-image-upload [isEditable]="isEditing === one.id" (imagesUploaded)="onImagesUploaded(one.id, '2', $event)"></app-image-upload>
 
                         <a target="_blank" href="{{ one.avatar3 }}">
-                          <img class="img-old" style="width: 128px; height: 128px; " src="{{ one.avatar3 }}" />
+                          <img class="img-old" style="width: 128px; height: 128px;" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }"  src="{{ one.avatar3 }}" />
                         </a>
 
                       </div>
 
                       <div *ngIf="! one.avatar3" >
                         <div class="position-relative float-left " style="height: 128px; width: 128px">
-                          <app-image-upload (imagesUploaded)="onImagesUploaded(one.id, '2', $event)"></app-image-upload>
+                          <app-image-upload [isEditable]="isEditing === one.id" (imagesUploaded)="onImagesUploaded(one.id, '2', $event)"></app-image-upload>
                         </div>
                         <span><i class="fa fa-download " style=" color: transparent; padding-right: 10px" ></i> </span>
                       </div>
