@@ -33,7 +33,7 @@
 									</div>
                   <!-- <th></th> -->
                   <div style="width: 25%;padding-left: 40px;">
-                    KYC ID Proof
+                    Location
                   </div>
                   <div style="width: 45%;padding-left: 0px;">
                     Avatars
@@ -126,7 +126,7 @@
                   <div style="display: flex;width: 19%;padding-left: 10px;margin-left: 10px;border-left: 1px solid #ddd;">
 
                     <div style="width: 160px;">
-                      <div class="position-relative">
+                      <div class="position-relative" style="display:none;">
                         <small>ID Photo</small>
                         <div style="display: flex;flex-direction: row;">
                         <img style="width: 128px; height: 128px;" [ngStyle]="{ cursor: isEditing === one.id ? 'pointer' : 'default' }" src="{{ one.id_photo }}" (click)="setImage(one.id_photo)"  data-toggle="modal" data-target="#myModal"  />
@@ -150,7 +150,7 @@
                               'text-danger': one.id_status === 'Rejected',
                               'text-success': one.id_status === 'Approved'
                           }"
-                               style="width: 100px;font-size: 13px;"
+                               style="width: 100px;font-size: 13px; display: none;"
                                *ngIf="isEditing !== one.id">
                             {{ one.id_status ?? 'Pending' }}
                           </div>
