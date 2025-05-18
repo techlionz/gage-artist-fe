@@ -1,9 +1,5 @@
 version: '3.8'
 
-networks:
-  mysql_gage-network:
-    external: true
-
 services:
   artist-fe:
     container_name: artist-fe
@@ -11,6 +7,4 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4202:80"
-    networks:
-      - mysql_gage-network
     restart: unless-stopped
