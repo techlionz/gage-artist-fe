@@ -23,7 +23,7 @@ FROM nginx:latest
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Copy custom nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY ssl/kyc_pokerpad_net_chain.crt /etc/ssl/certs/kyc_pokerpad_net_chain.crt
 COPY ssl/kyc_pokerpad_net.key /etc/ssl/private/kyc_pokerpad_net.key
 
@@ -32,7 +32,7 @@ COPY ssl/kyc_pokerpad_net.key /etc/ssl/private/kyc_pokerpad_net.key
 COPY --from=build /app/dist/ /usr/share/nginx/html
 
 # Expose HTTPS port
-EXPOSE 443
+EXPOSE 443 80
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]
