@@ -104,15 +104,17 @@
                       <form>
                         <div class="form-group" >
                           <label for="realName">Real Name</label>
-                          <input type="text" class="form-control" style="width: 220px;" (input)="onRealNameChange($event)" [value]="artistForm.value.real_name" id="realName"  *ngIf="isEditing === one.id"/>
+                          <input type="text" class="form-control" style="width: 220px;" (input)="onRealNameChange($event)" 
+                          [value]="(artistForm.value.real_name && artistForm.value.real_name !== 'null') ? artistForm.value.real_name : '' " id="realName"  *ngIf="isEditing === one.id"/>
                           <!-- Read-only display -->
-                          <input type="text" class="form-control" style="width: 220px;" id="realName" [value]="one.real_name" readonly *ngIf="isEditing !== one.id"/>
+                          <input type="text" class="form-control" style="width: 220px;" id="realName" [value]="(one.real_name && one.real_name !== 'null') ? one.real_name : '' " readonly *ngIf="isEditing !== one.id"/>
                         </div>
                         <div class="form-group">
                           <label for="nickname">Nickname</label>
-                          <input type="text" class="form-control" style="width: 220px;" (input)="onNickNameChange($event)" id="nickname" [value]="artistForm.value.nickname" *ngIf="isEditing === one.id"/>
+                          <input type="text" class="form-control" style="width: 220px;" (input)="onNickNameChange($event)" id="nickname" 
+                          [value]="(artistForm.value.nickname && artistForm.value.nickname !== 'null') ? artistForm.value.nickname : '' " *ngIf="isEditing === one.id"/>
                           <!-- Read-only display -->
-                          <input type="text" class="form-control" style="width: 220px;" id="nickname" [value]="one.nickname" readonly *ngIf="isEditing !== one.id"/>
+                          <input type="text" class="form-control" style="width: 220px;" id="nickname" [value]="(one.nickname && one.nickname !== 'null') ? one.nickname : '' " readonly *ngIf="isEditing !== one.id"/>
                         </div>
                       </form>
                     </div>
