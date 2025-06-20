@@ -85,7 +85,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
       photo: this.appendNoCache(record.photo),
       avatar: this.appendNoCache(record.avatar),
       avatar2: this.appendNoCache(record.avatar2),
-      avatar3: this.appendNoCache(record.avatar3),
+      // avatar3: this.appendNoCache(record.avatar3),
       id_photo: this.appendNoCache(record.id_photo),
     }));
       this.pageOptions.pageEvents.length = data.recordsFiltered;
