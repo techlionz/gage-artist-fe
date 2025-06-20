@@ -23,7 +23,7 @@ FROM nginx:latest
 COPY --from=build /app/dist/ /usr/share/nginx/html
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 80 443
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]
