@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
 
   APP_WELCOME: 'http://3.6.170.253:4202/login.html',
   APP_DASHBOARD: 'http://3.6.170.253:4202/dashboard.html',

@@ -13,8 +13,8 @@ RUN npm install
 # Copy project files
 COPY . .
 
-# Build the Angular app for production
-RUN npm run build --configuration=production
+# Build the Angular app for staging
+RUN npm run build --configuration=staging
 
 # Use Nginx as base image for serving Angular application
 FROM nginx:latest
