@@ -14,7 +14,8 @@ RUN npm install
 COPY . .
 
 # Build the Angular app for staging
-RUN npm run build --configuration=staging
+# RUN npm run build --configuration=staging
+RUN npm run build --configuration=production
 
 # Use Nginx as base image for serving Angular application
 FROM nginx:latest
