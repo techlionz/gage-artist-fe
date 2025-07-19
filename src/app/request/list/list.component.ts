@@ -143,12 +143,12 @@ export class ListComponent extends ListControllerComponent implements OnInit {
   }
 
     const requestBody = {
-      real_name: this.artistForm.get('real_name')?.value || null,
-      nickname: this.artistForm.get('nickname')?.value || null,
+      real_name: this.artistForm.get('real_name')?.value || '',
+      nickname: this.artistForm.get('nickname')?.value || '',
       id: id,
-      face_status: this.artistForm.get('face_status')?.value || null,
-      id_status: this.artistForm.get('id_status')?.value || null,
-      country: this.artistForm.get('country')?.value || null,
+      face_status: this.artistForm.get('face_status')?.value || '',
+      id_status: this.artistForm.get('id_status')?.value || '',
+      country: this.artistForm.get('country')?.value || '',
     };
 
     console.log(formData)
