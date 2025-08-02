@@ -18,6 +18,8 @@ export class LogoutComponent implements OnInit {
 		//Company
 
 		localStorage.removeItem('userData');
+		sessionStorage.removeItem('mfa_step');
+		sessionStorage.removeItem('artistId');
 
 		console.log("Logout" + environment.APP_WELCOME);
 		// this.router.navigate(['welcome']);
