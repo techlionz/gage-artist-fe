@@ -26,17 +26,25 @@
 						<img src="assets/images/big/icon.png" alt="wrapkit">
 					</div>
 					<h2 class="mt-3 text-center">Sign In</h2>
-					<p class="text-center">Enter your email address and password to access control panel.</p>
-
+					<p class="text-center" *ngIf="step === 'CREDENTIALS'">Enter your email address and password to access control panel.</p>
+					<p class="text-center" *ngIf="step === 'VERIFY_OTP'">Enter the OTP sent to your email to verify your identity.</p>
 					<!-- Session Status -->
 
 					<!-- Validation Errors -->
+					 <div *ngIf="hasError" class="text-danger text-normal mb-2">
+						<i class="fa-solid fa-circle-exclamation mr-1"></i>{{errorMessage}}
+					 </div>
 
-					<form method="POST" (ngSubmit)="onSubmit()">
+					<!-- Info Message -->
+					 <div *ngIf="infoMessage" class="text-success text-normal mb-2">
+						<i class="fa-solid fa-circle-info mr-1"></i>{{infoMessage}}
+					 </div>
+
+					<form method="POST" (ngSubmit)="step === 'CREDENTIALS' ? onSubmit() : verifyOtp()">
 						<input type="hidden" name="_token" value="HGS2DbZF01n1QgQthcOK3U46QhUKP5LWPNfEGmoi">
 						<!-- Email Address -->
-						<span class="text-danger text-normal mb-2" >{{errorMessage}}</span>
-						<div>
+						<!-- <span class="text-danger text-normal mb-2" >{{errorMessage}}</span> -->
+						<div *ngIf="step === 'CREDENTIALS'">
 							<label class="block font-medium text-sm text-gray-700" for="email">
 								Email
 							</label>
@@ -47,7 +55,7 @@
 						</div>
 
 						<!-- Password -->
-						<div class="mt-4">
+						<div class="mt-4" *ngIf="step === 'CREDENTIALS'">
 							<label class="block font-medium text-sm text-gray-700" for="password">
 								Password
 							</label>
@@ -58,22 +66,35 @@
 								autocomplete="current-password">
 						</div>
 
+						<div *ngIf="step === 'VERIFY_OTP'" class="mt-3">
+						<label for="otp">OTP</label>
+						<input [(ngModel)]="otp" name="otp" id="otp" type="password" maxlength="6" required
+							class="form-control block mt-1 w-full" placeholder="123456" />
+						</div>
+
 
 						<div class="flex items-center justify-end mt-4">
 
-							<button type="submit"
-								class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn btn-block btn-dark">
-								Log in
-							</button>
+						<button type="submit" [disabled]="isSubmitting" 
+						class="inline-flex items-center justify-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150 btn btn-block btn-dark">
+						
+						<ng-container *ngIf="isSubmitting; else buttonText">
+							<span class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+						</ng-container>
+						
+						<ng-template #buttonText>
+							{{ step === 'CREDENTIALS' ? 'Log in' : 'Verify OTP' }}
+						</ng-template>
+						</button>
+
 						</div>
 					</form>
 
-
-
-
-
-
-
+					<div *ngIf="step === 'VERIFY_OTP'" class="mt-2 d-flex justify-content-center">
+						<button class="btn btn-link text-decoration-none" (click)="resendOtp()">
+							Resend OTP
+						</button>
+					</div>
 
 				</div>
 			</div>

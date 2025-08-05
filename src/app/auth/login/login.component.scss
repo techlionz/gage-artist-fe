@@ -1,0 +1,37 @@
+.auth-box {
+  min-height: 500px; /* Ensures white card height is fixed */
+  max-width: 800px;  /* Keep width consistent */
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.auth-box .bg-white {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Keeps form vertically centered */
+}
+
+@media (max-width: 768px) {
+  .auth-box {
+    min-height: auto; /* Allow flexibility on mobile */
+  }
+}
+
+.spinner-border {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 0.15em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
