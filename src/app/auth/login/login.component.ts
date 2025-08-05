@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     this.errorMessage = 'Please enter both email and password.';
     return;
   }
+  this.isSubmitting = true;
   let data = {
     'email' : this.email,
     'password' : this.password
@@ -53,17 +54,25 @@ export class LoginComponent implements OnInit {
   let that = this ;
     this.httpx.post( Global.api('artist/login' ) , data).subscribe((response: any) => {
       this.data = response.data;
+      this.isSubmitting = false;
 
       if( response.status == "OK" ) {
 
+        if(response.data.mfa_enabled) {
         sessionStorage.setItem('mfa_step', 'VERIFY_OTP');
         sessionStorage.setItem('artistId', response.data.id);
         that.step = 'VERIFY_OTP' ;
         that.artistId = response.data.id ;
         this.infoMessage = 'OTP sent to your email. Enter it below.';
-
+        }
+        else {
+          let jsonData = JSON.stringify(this.data || {}) ;
+          localStorage.setItem('userData', jsonData );
+          that.document.location.href = environment.APP_DASHBOARD;
+        }
       }
     }, (response:any) => {
+      this.isSubmitting = false;
       if(response.error.status == "FAIL") {
 		  that.hasError = true ;
 		  that.errorMessage = response.error.messages.common ;
@@ -72,7 +81,6 @@ export class LoginComponent implements OnInit {
   }
 
 verifyOtp() : void {
-
   if (!this.otp || this.otp.trim() === '') {
     this.hasError = true;
     this.errorMessage = 'Please enter the OTP.';
@@ -86,6 +94,7 @@ verifyOtp() : void {
     this.infoMessage = '';
     return;
   }
+  this.isSubmitting = true;
 
   const artis_id = sessionStorage.getItem('artistId');
 
@@ -96,6 +105,7 @@ verifyOtp() : void {
 
   this.httpx.post(Global.api('artist/verify-otp'), payload).subscribe({
     next: (response: any) => {
+      this.isSubmitting = false;
       if(response.status === 'OK') {
         this.errorMessage = '';
         this.infoMessage = '';
