@@ -1,0 +1,41 @@
+.container {
+  border-radius: 12px;
+}
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  height: 250px; /* fixed height for consistent layout */
+}
+
+.fixed-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover; /* keeps image aspect ratio */
+  transition: transform 0.3s ease;
+}
+
+.hover-card:hover .fixed-image {
+  transform: scale(1.05);
+}
+
+.hover-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+}
+
+h2 {
+  letter-spacing: 1px;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffc107;
+//   color: #000;
+}

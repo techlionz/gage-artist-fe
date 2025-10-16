@@ -11,6 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { ImageUploadComponent } from '../base/components/image-upload';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { PopupComponent } from '../components/popup/popup.component';
+import { AppRoutingModule } from "src/app/app-routing.module";
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -28,7 +29,8 @@ import { PopupComponent } from '../components/popup/popup.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
-    NgxFileDropModule
-  ]
+    NgxFileDropModule,
+    AppRoutingModule
+]
 })
 export class RequestModule { }
