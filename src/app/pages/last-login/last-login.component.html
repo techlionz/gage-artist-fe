@@ -3,7 +3,7 @@
   <!-- Page Header -->
   <div class="text-center mb-5">
     <h2 class="fw-bold text-uppercase text-dark py-3 rounded shadow-sm">
-      Last Login - Player {{ nickname }} (ID: {{ playerId }}) Photos
+      {{ nickname }} (ID: {{ playerId }}) 
     </h2>
     <p class="text-muted mt-2">
       View the verified photos uploaded by Player {{ nickname }} (ID: {{ playerId }}) before entering the poker table.
@@ -31,7 +31,7 @@
         </div>
         <div class="card-body text-center">
           <p class="card-text small">
-            Uploaded: {{ photo.created_at | date:'medium' }}
+            Uploaded: <br> {{ photo.created_at | date:'medium' }}
           </p>  
           <button
             class="btn btn-outline-info btn-sm"

@@ -293,9 +293,13 @@
 
                   <!-- Navigation link -->
                   <div style="margin-top: 5px;">
-                    <a [routerLink]="['/last-login', one.id, one.nickname]" class="btn btn-link p-0" style="font-size: 12px;">
+                    <p style="text-align: center;">Click to view selfies</p>
+                    <button 
+                      (click)="goToLastLogin(one.id, one.nickname)" 
+                      class="btn btn-primary btn-sm" 
+                      style="font-size: 14px; padding: 7px 20px;width:150px;font-weight: 500;">
                       Selfies
-                    </a>
+                    </button>
                   </div>
 
                 </div>
