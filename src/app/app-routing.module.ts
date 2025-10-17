@@ -23,7 +23,7 @@ const routes: Routes = [
 
 	{ canActivate: [AuthGuard], path: 'change-password', component: ChangePasswordComponent },
 
-	{ canActivate: [AuthGuard], path: 'last-login/:id', component: LastLoginComponent },
+	{ canActivate: [AuthGuard], path: 'last-login/:id/:nickname', component: LastLoginComponent },
 
 	{ path: '**', redirectTo: 'dashboard' } 
 ];

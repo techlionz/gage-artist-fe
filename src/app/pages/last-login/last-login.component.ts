@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Global } from 'src/app/base/services/global';
+import Swal from 'sweetalert2';
 
 interface PlayerPhoto {
   id: number;
@@ -18,12 +19,13 @@ interface PlayerPhoto {
 })
 export class LastLoginComponent implements OnInit {
   playerId!: number;
+  nickname: string = '';
   photos: PlayerPhoto[] = [];
   loading = false;
   errorMessage = '';
   currentPage = 1;
   lastPage = 1;
-  perPage = 12; // ✅ Default per page
+  perPage = 24; // ✅ Default per page
 
   constructor(
     private http: HttpClient,
@@ -33,8 +35,10 @@ export class LastLoginComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
+      const nickname = params.get('nickname'); 
       if (id) {
         this.playerId = +id;
+        this.nickname = nickname || '';
         this.fetchPlayerPhotos(this.currentPage);
       } else {
         this.errorMessage = 'Invalid player ID';
@@ -50,7 +54,6 @@ export class LastLoginComponent implements OnInit {
     this.http.get<{ status: string; data: PlayerPhoto[]; pagination?: any }>(url)
       .subscribe({
         next: (res) => {
-          console.log('Response:', res);
           if (res.status === 'OK') {
             this.photos = res.data;
             if (res.pagination) {
@@ -76,20 +79,31 @@ export class LastLoginComponent implements OnInit {
     }
   }
 
-  downloadPhoto(url: string) {
-  fetch(url)
-    .then(response => response.blob())
+downloadPhoto(url: string) {
+  fetch(url, { mode: 'cors' })
+    .then(response => {
+      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+      return response.blob();
+    })
     .then(blob => {
-      const blobUrl = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
+      const blobUrl = window.URL.createObjectURL(blob);
       a.href = blobUrl;
-      a.download = url.split('/').pop() || 'photo.jpg';
+      a.download = url.split('/').pop() || 'photo.png';
       document.body.appendChild(a);
       a.click();
       a.remove();
       window.URL.revokeObjectURL(blobUrl);
+      Swal.fire({
+        icon: 'success',
+        title: 'Downloaded!',
+        text: 'Your photo has been downloaded successfully.',
+        timer: 2000,
+        showConfirmButton: false
+      });
     })
     .catch(err => console.error('Download failed:', err));
 }
+
 
 }

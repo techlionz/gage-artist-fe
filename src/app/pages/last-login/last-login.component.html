@@ -3,10 +3,10 @@
   <!-- Page Header -->
   <div class="text-center mb-5">
     <h2 class="fw-bold text-uppercase text-dark py-3 rounded shadow-sm">
-      Last Login - Player {{ playerId }} Photos
+      Last Login - Player {{ nickname }} (ID: {{ playerId }}) Photos
     </h2>
     <p class="text-muted mt-2">
-      View the verified photos uploaded by Player {{ playerId }} before entering the poker table.
+      View the verified photos uploaded by Player {{ nickname }} (ID: {{ playerId }}) before entering the poker table.
     </p>
     <hr class="w-50 mx-auto border-secondary">
   </div>
@@ -23,8 +23,8 @@
   </div>
 
   <!-- Photos Grid -->
-  <div class="row">
-    <div *ngFor="let photo of photos" class="col-sm-6 col-md-4 col-lg-3 mb-4">
+  <div class="row g-2">
+    <div *ngFor="let photo of photos" class="col-4 col-md-3 col-lg-2">
       <div class="card text-black border-0 shadow-lg hover-card">
         <div class="image-wrapper">
           <img [src]="photo.photo" class="card-img-top fixed-image" alt="Player Photo">
@@ -34,9 +34,10 @@
             Uploaded: {{ photo.created_at | date:'medium' }}
           </p>  
           <button
-            class="btn btn-outline-success btn-sm mt-2"
+            class="btn btn-outline-info btn-sm"
             (click)="downloadPhoto(photo.photo)">
-            <i class="bi bi-download"></i> Download
+            <!-- <i class="bi bi-download"></i> Download -->
+             <i class="fa fa-download" style="color:blue;"></i>
           </button>
         </div>
       </div>
