@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -19,10 +20,24 @@ import { Router } from '@angular/router';
 })
 export class ListComponent extends ListControllerComponent implements OnInit {
 
+  showPopup = false;
+  // Define form fields dynamically
+  formFields = [
+    { label: 'VPIP  Hand', model: 'vpip_hand' },
+    { label: 'VPIP Count', model: 'vpip_count' },
+    { label: 'PFR Hand', model: 'pfr_hand' },
+    { label: 'PFR Count', model: 'pfr_count' },
+    { label: 'Three Bet Hand', model: 'three_bet_hand' },
+    { label: 'Three Bet Count', model: 'three_bet_count' },
+  ];
   isDropdownOpen = false;
   selectedFaceStatus: { [key: string]: string } = {};
   artistForm!: FormGroup;
   isEditing: string | null =null;
+  loading = false;
+  loader = false;
+  saving = false;
+  currentId!: number;
   public records: any;
   public addCompanyUrl: string = 'affiliate-transactions/add';
   public pageOptions = Global.pageOptions();
@@ -292,6 +307,56 @@ setStatus(status: string) {
 
   goToLastLogin(id: number, nickname: string) {
     this.router.navigate(['/last-login', id, nickname]);
+  }
+
+  formData: any = {};
+
+  openPopup(id:  number) {
+    this.showPopup = true;
+    this.currentId = id;
+    this.loading = true;
+
+     const url = Global.api(`show-game-status/${id}`);
+
+    this.http.get<any>(url).subscribe({
+      next: (res) => {
+        this.formData = res.data;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error fetching player data:', err);
+        this.loading = false;
+      },
+    });
+  }
+
+  closePopup() {
+    this.showPopup = false;
+    this.formData = {};
+  }
+
+  // Submit updated data
+  onSubmit() {
+    this.loader = true;
+    this.http.put(Global.api(`game-status/${this.currentId}`), this.formData)
+      .subscribe({
+        next: (res) => {
+          // ✅ Success Popup
+        Swal.fire({
+          title: 'Success!',
+          text: 'Player status updated successfully.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          confirmButtonColor: '#3085d6'
+        });
+          this.loader = false;
+          this.closePopup();
+        },
+        error: (err) => {
+          console.error('Update failed:', err);
+          this.loader = false;
+        }
+      });
   }
   
 }

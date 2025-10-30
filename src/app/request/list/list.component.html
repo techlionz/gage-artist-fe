@@ -309,10 +309,22 @@
                   <button type="button" class="btn btn-primary" style="width: 150px;" (click)="enableEdit(one.id, one)" *ngIf="isEditing != one.id">
                     Edit
                   </button>
+                  
                   <button type="submit" class="btn btn-success" style="width: 150px;text-align:center;" *ngIf="isEditing===one.id">
                     Save Changes
                   </button>
                   <button class="btn btn-secondary" type="button" *ngIf="isEditing === one.id" style="width: 150px;margin-top: 10px;" (click)="closeEdit()" >Cancel</button>
+                  
+                  <div class="status-div" *ngIf="isEditing != one.id">
+                    <p style="text-align: center;">Click to update player status 👇</p>
+                    <button 
+                      (click)="openPopup(one.id)" 
+                      class="btn btn-primary" 
+                      type="button"
+                      style="font-size: 14px;width:150px;font-weight: 500;">
+                       Update Status
+                    </button>
+                  </div>
                 </div>
 
 
@@ -353,3 +365,42 @@
 
                     <!-- POPUP MODAL -->
 <app-popup *ngIf="isEditing != null" [file]="artistForm.value.file"></app-popup>
+
+<!-- Popup Modal -->
+<div class="popup-overlay" *ngIf="showPopup">
+  <div class="popup-container">
+
+    <!-- Loader when fetching -->
+    <div *ngIf="loading" class="loader-container">
+      <div class="spinner"></div>
+      <p>Loading player details...</p>
+    </div>
+
+    <!-- Form appears after data loads -->
+    <div *ngIf="!loading">
+      <h3 class="font-weight-bold">Update Player Status</h3>
+
+      <form (ngSubmit)="onSubmit()" #statusForm="ngForm">
+        <div class="form-group" *ngFor="let field of formFields">
+          <label>{{ field.label }}</label>
+          <input
+            [(ngModel)]="formData[field.model]"
+            name="{{ field.model }}"
+            class="form-control"
+            type="text"
+            required
+          />
+        </div>
+
+        <div class="popup-actions">
+          <button type="submit" class="btn btn-success" [disabled]="loader">
+            {{ loader ? 'Updating...' : 'Update' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="closePopup()">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
