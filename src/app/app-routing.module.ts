@@ -5,9 +5,9 @@ import { AuthGuard } from './auth/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
-import { AfterLoginComponent } from './auth/after-login/after-login.component';
 import { ChangePasswordComponent } from './auth/change-password/change-password.component';
 import { GuestGuard } from './auth/service/auth/guest.guard';
+import { LastLoginComponent } from './pages/last-login/last-login.component';
 
 const routes: Routes = [
 
@@ -22,6 +22,8 @@ const routes: Routes = [
 	{ canActivate: [AuthGuard], path: 'requests', component: RequestListComponent },
 
 	{ canActivate: [AuthGuard], path: 'change-password', component: ChangePasswordComponent },
+
+	{ canActivate: [AuthGuard], path: 'last-login/:id/:nickname', component: LastLoginComponent },
 
 	{ path: '**', redirectTo: 'dashboard' } 
 ];

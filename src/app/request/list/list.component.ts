@@ -10,6 +10,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -44,6 +45,7 @@ export class ListComponent extends ListControllerComponent implements OnInit {
     private location: Location,
     private http: HttpClient,
     private fb: FormBuilder,
+    private router: Router,
   ) {
     super(location, httpx);
     this.artistForm = this.fb.group({
@@ -286,6 +288,10 @@ setStatus(status: string) {
       .catch(error => {
         console.error('Download failed:', error);
       });
+  }
+
+  goToLastLogin(id: number, nickname: string) {
+    this.router.navigate(['/last-login', id, nickname]);
   }
   
 }

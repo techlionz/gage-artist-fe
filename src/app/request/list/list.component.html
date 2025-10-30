@@ -288,30 +288,20 @@
                 </div>
 
                 <!-- VERIFIED PHOTO -->
-                <div style="width: 15%; border-left: 1px solid #ddd; display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 15%; border-left: 1px solid #ddd; display: flex; flex-direction: column; align-items: center;justify-content: center;">
+                  <!-- LAST LOGIN COLUMN -->
 
-                  <div class="position-relative float-left" style="display: flex; flex-direction: column;">
-
-                    <small>Last Login</small>
-
-                    <img 
-                      src="{{ one.verified_photo }}" 
-                      style="width: 128px; height: 128px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1);"
-                    />
-
-                    <div style="margin-top: 10px;">
-                      <small style="font-weight: 500;">Uploaded At :</small>
-                    </div>
-
-                    <!-- Time display section -->
-                    <div style="margin-top: 10px; background: #f8f9fa; border-radius: 6px; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
-                      <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px; color: #6c757d;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span style="font-size: 13px; color: #333;">{{ one.uploaded_at | date: 'short' }}</span>
-                    </div>
-
+                  <!-- Navigation link -->
+                  <div style="margin-bottom: 32px;">
+                    <p style="text-align: center;">Click to view selfies</p>
+                    <button 
+                      (click)="goToLastLogin(one.id, one.nickname)" 
+                      class="btn btn-primary" 
+                      style="font-size: 14px; padding: 7px 20px;width:150px;font-weight: 500;">
+                      Selfies
+                    </button>
                   </div>
+
                 </div>
 
                 <!-- ACTIONS -->

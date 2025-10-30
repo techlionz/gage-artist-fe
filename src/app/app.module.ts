@@ -14,6 +14,7 @@ import { FragmentsModule } from './fragments/fragments.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { LastLoginComponent } from './pages/last-login/last-login.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ToastrModule } from 'ngx-toastr';
     HeaderComponent,
     NavbarComponent,
     DashboardComponent,
+    LastLoginComponent,
   ],
   imports: [
     BrowserModule,
