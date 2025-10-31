@@ -305,15 +305,15 @@
                     </div>
                   </div>
 
-                  <!-- Navigation link -->
+                 <!-- Navigation link -->
                   <div style="margin-top: 20px;">
-                    <p style="text-align: center;"><u>Click to view selfies</u></p>
-                    <button 
+                    <p style="text-align: center; cursor: pointer;" (click)="goToLastLogin(one.id, one.nickname)"><u>Click to view selfies</u></p>
+                    <!-- <button 
                       (click)="goToLastLogin(one.id, one.nickname)" 
                       class="btn btn-primary" 
                       style="font-size: 14px; padding: 7px 20px;width:150px;font-weight: 500;">
                       Selfies
-                    </button>
+                    </button> -->
                   </div>
 
                 </div>
