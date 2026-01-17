@@ -8,37 +8,40 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-after-login',
   templateUrl: './after-login.component.html',
-  styleUrls: ['./after-login.component.scss']
+  styleUrls: ['./after-login.component.scss'],
 })
 export class AfterLoginComponent implements OnInit {
-
   public token: any;
-  public user:any = [] ;
+  public user: any = [];
 
-  constructor(@Inject(DOCUMENT) private document: Document,
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private httpx: HttpxService ) {
-  }
+    private httpx: HttpxService,
+  ) {}
 
-  ngOnInit(): void {    
-    debugger;
-    this.token = this.activatedRoute.snapshot.queryParamMap.get("token");
+  ngOnInit(): void {
+    // Extract the 'token' from the URL query parameters
+    this.token = this.activatedRoute.snapshot.queryParamMap.get('token');
 
-    if( this.token != null && this.token.length > 0 ) {
+    // Check if the token is valid and present
+    if (this.token != null && this.token.length > 0) {
+      // Store the token for global API authentication
       localStorage.setItem('token', this.token);
 
-      this.httpx.get(Global.api(Global.API_USER )).subscribe((data: any) => {
-        //Find user details.
+      // Fetch the full User Object using the new token
+      this.httpx.get(Global.api(Global.API_USER)).subscribe((data: any) => {
+        // Cache the User details locally for UI display (Name, Email, etc.)
         this.user = data.data;
         localStorage.setItem('user', JSON.stringify(this.user));
-        // this.router.navigate(['dashboard/launch']);
+        // Successful session setup: Send user to the secure Dashboard
         this.document.location.href = environment.APP_DASHBOARD;
-        return ;
+        return;
       });
-    }
-    else {
-      this.document.location.href = environment.AUTH_BEGIN ;
+    } else {
+      // Security Fallback: If no token exists, send user back to the very start of Login
+      this.document.location.href = environment.AUTH_BEGIN;
     }
   }
 }

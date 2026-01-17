@@ -6,26 +6,25 @@ import { HttpxService } from 'src/app/base/services/httpx.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-	selector: 'app-logout',
-	templateUrl: './logout.component.html',
-	styleUrls: ['./logout.component.scss']
+  selector: 'app-logout',
+  templateUrl: './logout.component.html',
+  styleUrls: ['./logout.component.scss'],
 })
 export class LogoutComponent implements OnInit {
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router,
+    private httpx: HttpxService,
+  ) {
+    // Session Cleansing: Immediately remove the user's data from LocalStorage.
+    localStorage.removeItem('userData');
 
-	constructor(@Inject(DOCUMENT) private document: Document, private router: Router,
-		private httpx: HttpxService) {
+    console.log('Logout' + environment.APP_WELCOME);
+    // Hard Redirect: Perform a full page reload to the Login  page.
+    this.document.location.href = environment.APP_WELCOME;
+  }
 
-		//Company
-
-		localStorage.removeItem('userData');
-
-		console.log("Logout" + environment.APP_WELCOME);
-		// this.router.navigate(['welcome']);
-		this.document.location.href = environment.APP_WELCOME;
-
-	}
-
-	ngOnInit(): void {
-		// this.document.location.href = environment.AUTH_BEGIN ;
-	}
+  ngOnInit(): void {
+    // this.document.location.href = environment.AUTH_BEGIN ;
+  }
 }

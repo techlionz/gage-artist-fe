@@ -26,6 +26,7 @@ export class ChangePasswordComponent implements OnInit {
     private location: Location,
     private http: HttpClient
   ) {
+    // Initial form setup with base validation rules
     this.changePasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       current_password: ['', [Validators.required]],
@@ -35,10 +36,12 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Lifecycle hook: Initialize the form with actual user data upon component load
     this.initForm();
   }
 
   initForm() {
+    // Retrieve stored user session data to auto-populate the email field
     const userDataString = localStorage.getItem('userData');
     let storedEmail = '';
 
@@ -51,7 +54,7 @@ export class ChangePasswordComponent implements OnInit {
       }
     }
 
-    // Initialize the form with the retrieved email
+    //  Re-initialize the form with the retrieved email to improve user experience
     this.changePasswordForm = this.fb.group({
       email: [storedEmail, [Validators.required, Validators.email]],
       current_password: ['', [Validators.required]],
@@ -62,16 +65,21 @@ export class ChangePasswordComponent implements OnInit {
   
 
   onSubmit() {
+    // Check if the form meets all validation requirements 
     if (this.changePasswordForm.valid) {
       const data = this.changePasswordForm.value;
 
+      // Execute POST request to the artist security endpoint
       this.httpx.post(Global.api('artist/update-password'), data).pipe(
+        // Error Handling: Capture server-side errors (e.g., incorrect current password)
         catchError((error: any) => {
           console.error('Password update failed', error);
+          // Extract specific error message from the backend response or use a default
           this.error_message = error.error?.messages.common || 'Failed to update password.';
-          return of(null);
+          return of(null); // Prevent the app from crashing on error
         })
       ).subscribe((response: any) => {
+        // Success Logic: If backend accepts the change, notify user and clear the form
         if (response) {
           this.success_message = 'Password updated successfully!';
           this.error_message = '';
@@ -81,10 +89,11 @@ export class ChangePasswordComponent implements OnInit {
         }
       });
     } else {
+      // Client-side Validation Fallback: Alert user if fields are missing or invalid
       this.error_message = 'Please fill out all required fields correctly.';
     }
   }
-
+  // Helper method to reset UI notification states
   clearMessages() {
     this.success_message = '';
     this.error_message = '';

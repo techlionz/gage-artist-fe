@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileSystemFileEntry, NgxFileDropEntry } from 'ngx-file-drop';
 
+//Image upload component to upload images and display them in a preview 
+
 @Component({
   selector: 'app-image-upload',
   template: `
@@ -13,7 +15,7 @@ import { FileSystemFileEntry, NgxFileDropEntry } from 'ngx-file-drop';
       </ngx-file-drop>
       <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none;" multiple>
     </div>
-
+    <!-- Image previews go here -->
     <div *ngIf="imagePreviews.length > 0" class="preview-container">
       <div *ngFor="let preview of imagePreviews; let i = index" class="image-preview">
         <img [src]="preview" alt="Preview" />
